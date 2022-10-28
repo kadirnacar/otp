@@ -34,7 +34,7 @@ func startWs(addr string) {
 		conn = nil
 		log.Println("dial:", err)
 		// var json = "{ \"server\": {}, \"streams\": { \"sss\": { \"url\": \"rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov\", \"disable_audio\": true, \"on_demand\": false }},\"recording\": {\"duration\": 5,\"path\": \"/Users/kadirnacar/Desktop/temp/deneme/kadir\",\"paths\": [],\"encrypted\": false}}"
-		var json = "{ \"server\": {}, \"streams\": { \"disable_audio\": true, \"on_demand\": false },\"recording\": {\"camurl\": \"http://192.168.1.108/onvif/device_service\" ,\"campassword\": \"admin\" ,\"camusername\": \"admin\" ,\"aiduration\": 250, \"saveduration\": 10000,\"path\": \"/Users/kadirnacar/Desktop/temp/deneme/kadir\",\"paths\": [],\"encrypted\": false}}"
+		var json = "{ \"server\": {}, \"streams\": { \"disable_audio\": true, \"on_demand\": false },\"recording\": {\"camurl\": \"http://192.168.1.108/onvif/device_service\" ,\"campassword\": \"admin\" ,\"camusername\": \"admin\" ,\"aiduration\": 250, \"saveduration\": 10000,\"path\": \"./records\",\"paths\": [],\"encrypted\": false}}"
 		loadConfig2(json)
 		startOvif()
 		go serveStreams()
