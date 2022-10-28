@@ -3,8 +3,8 @@ const darkPalette = {
     palette: {
       primary: {
         light: '#fce4ec',
-        main: '#e91e63',
-        dark: '#ad1457',
+        main: '#e91e1e',
+        dark: '#e91e1e',
         contrastText: '#fff',
       },
       secondary: {

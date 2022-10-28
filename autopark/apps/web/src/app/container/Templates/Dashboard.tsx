@@ -39,6 +39,12 @@ class Dashboard extends Component<Props & WithRouter, State> {
     this.props.UiActions?.openSubMenu(parts[parts.length - 1].replace('-', ' ') || '/');
     this.props.UiActions?.toggleSidebar();
     this.props.UiActions?.loadPage(true);
+
+    document.body.onresize = (ev) => {
+      this.setState({
+        appHeight: window.innerHeight + 112,
+      });
+    };
   }
 
   override render() {

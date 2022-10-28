@@ -17,6 +17,7 @@ import { DataState } from '../../reducers/Data/state';
 import { ApplicationState } from '../../store';
 import { WithRouter, withRouter } from '../../withRouter';
 import styles from './header-jss';
+import logo from '../../../assets/images/logo.png';
 
 interface Props extends WithRouter {
   classes?: any;
@@ -168,6 +169,7 @@ class Header extends Component<Props, State> {
             </span>
             <Hidden smDown>
               <NavLink to="/" className={classNames(classes.brand, classes.brandBar)}>
+              <img src={logo} />
                 OTP
               </NavLink>
             </Hidden>
