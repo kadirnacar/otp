@@ -104,7 +104,7 @@ func analysisImage(image image.YCbCr) {
 	}
 	if len(detects) > 0 {
 		data, err := json.Marshal(detects)
-		log.Println(string(data))
+		// log.Println(string(data))
 		if err == nil {
 			sendMessage(WsMessage{Command: "detect", Data: string(data)})
 		}

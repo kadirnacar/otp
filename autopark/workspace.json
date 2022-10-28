@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "projects": {
+    "models": "libs/models",
+    "server": "apps/server",
+    "web": "apps/web",
+    "go": "apps/go"
+  }
+}

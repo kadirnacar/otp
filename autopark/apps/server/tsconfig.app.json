@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "module": "ES2015",
+    "types": ["node", "express"],
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": false,
+  },
+  "exclude": [],
+  "include": ["**/*.ts"]
+}

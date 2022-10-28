@@ -49,6 +49,7 @@
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "web:build",
+        "proxyConfig": "apps/web/proxy.conf.json",
         "hmr": true
       },
       "configurations": {
@@ -59,21 +60,6 @@
           "buildTarget": "web:build:production",
           "hmr": false
         }
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/web/**/*.{ts,tsx,js,jsx}"]
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/web/jest.config.ts",
-        "passWithNoTests": true
       }
     }
   },
