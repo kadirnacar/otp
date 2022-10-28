@@ -5,7 +5,7 @@ go 1.18
 require github.com/deepch/vdk v0.0.19
 
 require (
-	github.com/LdDl/go-darknet v1.3.7 // indirect
+	github.com/LdDl/go-darknet v1.3.7
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/gorilla/websocket v1.5.0
@@ -30,5 +30,5 @@ require (
 	golang.org/x/image v0.0.0-20211028202545-6944b10bf410 // indirect
 	golang.org/x/net v0.0.0-20220531201128-c960675eff93 // indirect
 	golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab // indirect
-	source.smiproject.co/forks/go-onvif v1.0.9 // indirect
+	source.smiproject.co/forks/go-onvif v1.0.9
 )
