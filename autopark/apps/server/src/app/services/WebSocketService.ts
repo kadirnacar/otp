@@ -10,7 +10,7 @@ export default class WebSocketService {
     this.wss.on('connection', async (ws: WebSocket, request: IncomingMessage) => {
       const urlSplit = request.url?.split('?');
       let id = '';
-
+      console.log('connected');
       if (urlSplit && urlSplit.length > 1) {
         id = urlSplit.pop();
       }
@@ -33,7 +33,6 @@ export default class WebSocketService {
         }
       });
     });
-   
   }
 
   wss: WebSocket.Server;
