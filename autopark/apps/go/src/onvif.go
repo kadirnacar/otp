@@ -6,6 +6,7 @@ import (
 	"image"
 	"log"
 	"strings"
+	"time"
 
 	"github.com/LdDl/go-darknet"
 	goonvif "source.smiproject.co/forks/go-onvif"
@@ -17,46 +18,63 @@ var n = darknet.YOLONetwork{
 	WeightsFile:              "yolov7-tiny.weights",
 	Threshold:                .25,
 }
+var rtspUrl string
 
 func startOvif() string {
 
-	log.Println("Test GetStreamURI")
-	log.Println(Config.Recording)
+	log.Println("GetStreamURI")
+
 	ovfDevice := goonvif.Device{
 		XAddr:    Config.Recording.CameraUrl,
 		User:     Config.Recording.CameraUsername,
 		Password: Config.Recording.CameraPassword,
 	}
+	for {
+		log.Println("Connect Onvif")
+		var err error
 
-	caps, err := ovfDevice.GetCapabilities()
+		caps, err := ovfDevice.GetCapabilities()
 
-	if err != nil {
-		fmt.Printf("Get cap error %s\n", err.Error())
+		if err != nil {
+			fmt.Printf("Get cap error %s\n", err.Error())
+
+			time.Sleep(1 * time.Second)
+			continue
+		}
+
+		ovfMedia := goonvif.Device{
+			XAddr:    caps.Media.XAddr,
+			User:     ovfDevice.User,
+			Password: ovfDevice.Password,
+		}
+
+		profiles, err := ovfMedia.GetProfiles()
+		if err != nil {
+			log.Println("onvif profiles:", err)
+			time.Sleep(1 * time.Second)
+			continue
+		}
+		uri, err := ovfMedia.GetStreamURI(profiles[0].Token, "RTSP")
+		if err != nil {
+			log.Println("onvif getstreamuri:", err)
+			time.Sleep(1 * time.Second)
+			continue
+		}
+		rtspUrl = strings.Replace(uri.URI, "192.168.1.108", "admin:admin@192.168.1.108", -1)
+		Config.Streams.URL = rtspUrl
+		if err := n.Init(); err != nil {
+			log.Println("onvif darknet init:", err)
+			time.Sleep(1 * time.Second)
+			continue
+		}
+
+		log.Println("Onvif connected")
+		break
 	}
 
-	ovfMedia := goonvif.Device{
-		XAddr:    caps.Media.XAddr,
-		User:     ovfDevice.User,
-		Password: ovfDevice.Password,
-	}
-
-	profiles, err := ovfMedia.GetProfiles()
-	if err != nil {
-		log.Println("onvif profiles:", err)
-		return ""
-	}
-	uri, err := ovfMedia.GetStreamURI(profiles[0].Token, "RTSP")
-	if err != nil {
-		log.Println("onvif getstreamuri:", err)
-	}
-	var url = strings.Replace(uri.URI, "192.168.1.108", "admin:admin@192.168.1.108", -1)
-	Config.Streams.URL = url
-	if err := n.Init(); err != nil {
-		log.Println("onvif darknet init:", err)
-	}
 	// defer n.Close()
 
-	return url
+	return rtspUrl
 
 }
 

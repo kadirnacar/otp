@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Camera, User } from '@autopark/models';
 import { BaseState } from '../Base';
 
 export enum Actions {
@@ -24,6 +25,8 @@ export interface DataItemState<T> extends BaseState {
 }
 
 export interface DataState {
+  User: DataItemState<User>;
+  Camera: DataItemState<Camera>;
 }
 
 export interface ISetItemDataAction {

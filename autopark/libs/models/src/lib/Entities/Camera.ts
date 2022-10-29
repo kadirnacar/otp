@@ -15,9 +15,6 @@ export class Camera extends BaseEntity {
   port?: number;
 
   @Column({ nullable: true })
-  rtspPort?: number;
-
-  @Column({ nullable: true })
   username?: string;
 
   @Column({ nullable: true })

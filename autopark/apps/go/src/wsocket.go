@@ -12,8 +12,7 @@ import (
 )
 
 var (
-	conn         *websocket.Conn
-	apiConnected = false
+	conn *websocket.Conn
 )
 
 func sendMessage(msg WsMessage) {
@@ -34,7 +33,6 @@ func connectApi(addr string) *websocket.Conn {
 		var err error
 		conn, _, err = websocket.DefaultDialer.Dial(u.String(), nil)
 		if err != nil {
-			apiConnected = false
 			log.Println("dial: ", err)
 			time.Sleep(1 * time.Second)
 			continue
@@ -44,7 +42,6 @@ func connectApi(addr string) *websocket.Conn {
 		break
 	}
 
-	apiConnected = true
 	return conn
 }
 
@@ -64,32 +61,30 @@ func startWs(addr string) {
 			_, message, err := conn.ReadMessage()
 			if err != nil {
 				log.Println("read: ", err)
-				apiConnected = false
 				conn = connectApi(addr)
-				defer conn.Close()
-				return
-			}
+				// return
+			} else {
+				var tmp WsMessage
+				errJson := json.Unmarshal([]byte(message), &tmp)
+				if errJson != nil {
+					log.Println("Ws Message Parse Error:", err)
+					continue
+				}
 
-			var tmp WsMessage
-			errJson := json.Unmarshal([]byte(message), &tmp)
-			if errJson != nil {
-				log.Println("Ws Message Parse Error:", err)
-				continue
-			}
+				if tmp.Command == "init" {
+					loadConfig2(tmp.Data)
+					// var json = "{ \"server\": {}, \"streams\": { \"disable_audio\": true, \"on_demand\": false },\"recording\": {\"camurl\": \"http://192.168.1.108/onvif/device_service\" ,\"campassword\": \"admin\" ,\"camusername\": \"admin\" ,\"aiduration\": 250, \"saveduration\": 10000,\"path\": \"./records\",\"paths\": [],\"encrypted\": false}}"
+					// loadConfig2(json)
+					startOvif()
+					go serveStreams()
+					// go startRecorder()
+				} else if tmp.Command == "close" {
+					os.Exit(0)
+				}
+				log.Printf("recv: %s", tmp)
 
-			if tmp.Command == "init" {
-				loadConfig2(tmp.Data)
-				// var json = "{ \"server\": {}, \"streams\": { \"disable_audio\": true, \"on_demand\": false },\"recording\": {\"camurl\": \"http://192.168.1.108/onvif/device_service\" ,\"campassword\": \"admin\" ,\"camusername\": \"admin\" ,\"aiduration\": 250, \"saveduration\": 10000,\"path\": \"./records\",\"paths\": [],\"encrypted\": false}}"
-				// loadConfig2(json)
-				startOvif()
-				go serveStreams()
-				// go startRecorder()
-			} else if tmp.Command == "close" {
-				os.Exit(0)
+				log.Printf("recv: %s", message)
 			}
-			log.Printf("recv: %s", tmp)
-
-			log.Printf("recv: %s", message)
 		}
 	}()
 }

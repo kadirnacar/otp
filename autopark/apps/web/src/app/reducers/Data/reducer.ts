@@ -21,6 +21,14 @@ import {
 } from './state';
 
 const unloadedState: DataState = {
+  User: {
+    List: [],
+    operationLoading: false,
+  },
+  Camera: {
+    List: [],
+    operationLoading: false,
+  },
 };
 
 export type KnownAction =

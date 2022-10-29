@@ -10,7 +10,6 @@ export default class WebSocketService {
     this.wss.on('connection', async (ws: WebSocket, request: IncomingMessage) => {
       const urlSplit = request.url?.split('?');
       let id = '';
-      console.log('connected');
       if (urlSplit && urlSplit.length > 1) {
         id = urlSplit.pop();
       }
@@ -19,11 +18,28 @@ export default class WebSocketService {
         ws.close();
         return;
       }
+      console.log('connected', id);
 
       const device = await this.initClient(id, ws);
+      var json = {
+        server: {},
+        streams: { disable_audio: true, on_demand: false },
+        recording: {
+          camurl: 'http://192.168.1.108/onvif/device_service',
+          campassword: 'admin',
+          camusername: 'admin',
+          aiduration: 250,
+          saveduration: 10000,
+          path: './records',
+          paths: [],
+          encrypted: false,
+        },
+      };
+
+      ws.send(JSON.stringify({ Command: 'init', Data: JSON.stringify(json) }));
 
       ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
-        // console.log(isBinary, data.toString(), id);
+        console.log(isBinary, data.toString(), id);
       });
 
       ws.on('close', () => {

@@ -17,17 +17,17 @@ import (
 	"github.com/deepch/vdk/av"
 )
 
-//Config global
+// Config global
 var Config = loadConfig()
 var empty interface{}
 
-//ConfigST struct
+// ConfigST struct
 type WsMessage struct {
 	Command string `json:"command"`
 	Data    string `json:"data"`
 }
 
-//ConfigST struct
+// ConfigST struct
 type ConfigST struct {
 	mutex   sync.RWMutex
 	screen  bufio.Writer
@@ -50,7 +50,7 @@ type Recording struct {
 	CameraPassword string   `json:"campassword"`
 }
 
-//ServerST struct
+// ServerST struct
 type ServerST struct {
 	HTTPPort      string   `json:"http_port"`
 	ICEServers    []string `json:"ice_servers"`
@@ -60,7 +60,7 @@ type ServerST struct {
 	WebRTCPortMax uint16   `json:"webrtc_port_max"`
 }
 
-//StreamST struct
+// StreamST struct
 type StreamST struct {
 	URL          string `json:"url"`
 	Status       bool   `json:"status"`
@@ -139,8 +139,6 @@ func loadConfig2(data string) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	log.Println(tmp)
-
 	tmp.Streams.Cl = make(map[string]viewer)
 	Config = &tmp
 }
@@ -243,19 +241,19 @@ func (element *ConfigST) clAd() (string, chan av.Packet) {
 	return cuuid, ch
 }
 
-// func (element *ConfigST) list() (string, []string) {
-// 	element.mutex.Lock()
-// 	defer element.mutex.Unlock()
-// 	var res []string
-// 	var fist string
-// 	for k := range element.Streams {
-// 		if fist == "" {
-// 			fist = k
-// 		}
-// 		res = append(res, k)
-// 	}
-// 	return fist, res
-// }
+//	func (element *ConfigST) list() (string, []string) {
+//		element.mutex.Lock()
+//		defer element.mutex.Unlock()
+//		var res []string
+//		var fist string
+//		for k := range element.Streams {
+//			if fist == "" {
+//				fist = k
+//			}
+//			res = append(res, k)
+//		}
+//		return fist, res
+//	}
 func (element *ConfigST) clDe(cuuid string) {
 	element.mutex.Lock()
 	defer element.mutex.Unlock()

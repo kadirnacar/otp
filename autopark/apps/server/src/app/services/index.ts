@@ -7,9 +7,9 @@ export const AppDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
   port: 5433,
-  username: 'nemesis',
+  username: 'otp',
   password: '123',
-  database: 'nemesis',
+  database: 'otp',
   synchronize: true,
   logging: false,
   entities: Object.keys(Models).map((itm) => {
