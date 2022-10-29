@@ -1,12 +1,25 @@
 {
   "name": "autopark",
+  "bin": "dist/main.js",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build"
+    "start": "nx run-many --target=serve --projects=server,web",
+    "build": "nx run-many --target=build --projects=server,web,go",
+    "test": "nx build server --with-deps --buildLibsFromSource",
+    "prod": "nx run-many --target=build --projects=server,web,go --prod"
   },
   "private": true,
+  "pkg": {
+    "scripts": "dist/**/*.js", 
+    "assets": "dist/**/*",
+    "targets": [
+      "node14-linux-x64",
+      "node14-macos-arm64",
+      "node14-win-x64"
+    ],
+    "outputPath": "bin"
+  },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -39,7 +52,12 @@
     "regenerator-runtime": "0.13.7",
     "sass-material-colors": "0.0.5",
     "tslib": "^2.3.0",
-    "typeorm": "^0.3.10"
+    "typeorm": "^0.3.10",
+    "body-parser": "1.20.1",
+    "reflect-metadata": "0.1.13",
+    "webpack": "5.74.0",
+    "webpack-node-externals": "3.0.0",
+    "ws": "8.10.0"
   },
   "devDependencies": {
     "@nrwl/cli": "15.0.4",
@@ -65,6 +83,7 @@
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "nx": "15.0.4",
+    "pkg": "^5.8.0",
     "prettier": "^2.6.2",
     "raw-loader": "^4.0.2",
     "ts-jest": "28.0.5",

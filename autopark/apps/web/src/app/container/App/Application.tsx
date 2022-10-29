@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import PapperBlock from '../../components/PapperBlock';
 import Home from '../../views/Home';
 import Dashboard from '../Templates/Dashboard';
 import { AppContext } from './AppContext';
@@ -15,9 +16,11 @@ export class Application extends Component<Props, State> {
   override render() {
     return (
       <Dashboard changeMode={this.context}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <PapperBlock showHeader={false}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </PapperBlock>
       </Dashboard>
     );
   }

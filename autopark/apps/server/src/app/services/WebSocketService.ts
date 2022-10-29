@@ -1,4 +1,4 @@
-import WebSocket from 'ws';
+import * as WebSocket from 'ws';
 import { IncomingMessage } from 'http';
 import { Camera as CameraModel } from '@autopark/models';
 
@@ -33,6 +33,7 @@ export default class WebSocketService {
         }
       });
     });
+   
   }
 
   wss: WebSocket.Server;
@@ -52,12 +53,10 @@ export default class WebSocketService {
       return this.clients[id];
     }
 
-    let device = await this.getCamera(id);
+    // let device = await this.getCamera(id);
 
-    const item = { ws, device };
+    // const item = { ws, device };
 
-    this.clients[id] = item;
-
-    return item;
+    this.clients[id] = {} as any;
   }
 }

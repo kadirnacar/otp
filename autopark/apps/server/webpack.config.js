@@ -8,9 +8,10 @@ module.exports = (config, context) => {
     config.mode == 'development'
       ? {
           externals: [nodeExternals()],
+          target: 'node',
           module: {
             rules: [{ test: /\.svg$/, use: 'raw-loader' }],
-          },
+          }
         }
       : {
           externals: [nodeExternals()],

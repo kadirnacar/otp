@@ -6,7 +6,7 @@
       "build": {
         "executor": "nx:run-commands",
         "options": {
-          "command": "go build -o='../../../dist/apps/go/' .",
+          "command": "go build -o='../../../dist/' .",
           "cwd": "apps/go/src"
         }
       },

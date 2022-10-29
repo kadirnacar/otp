@@ -9,7 +9,6 @@ import (
 
 func main() {
 	// serverAddr := os.Args[1]
-
 	go startWs("localhost:3333")
 	// go startWs(serverAddr)
 

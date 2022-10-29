@@ -5,6 +5,7 @@ dist
 tmp
 /out-tsc
 records
+bin
 
 # dependencies
 node_modules

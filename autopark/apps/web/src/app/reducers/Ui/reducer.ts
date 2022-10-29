@@ -16,7 +16,7 @@ import {
 
 const unloadedState: UiState = {
   /* Settings for Themes and layout */
-  theme: 'redTheme',
+  theme: 'blueTheme',
   type: 'dark', // light or dark
   /* End settings */
   palette: [

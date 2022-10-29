@@ -9,12 +9,12 @@
       "outputs": ["{options.outputPath}"],
       "options": {
         "target": "node",
-        "compiler": "tsc",
-        "outputPath": "dist/apps/server",
+        "compiler": "babel",
+        "outputPath": "dist",
         "main": "apps/server/src/main.ts",
         "tsConfig": "apps/server/tsconfig.app.json",
         "assets": ["apps/server/src/assets"],
-        "webpackConfig": "packages/server/webpack.config.js",
+        "webpackConfig": "apps/server/webpack.config.js",
         "generatePackageJson": true
       },
       "configurations": {
@@ -34,7 +34,8 @@
     "serve": {
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "server:build"
+        "buildTarget": "server:build",
+        "watch": true
       },
       "configurations": {
         "production": {

@@ -7,10 +7,9 @@
     "build": {
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
       "options": {
         "compiler": "babel",
-        "outputPath": "dist/apps/web",
+        "outputPath": "dist/web",
         "index": "apps/web/src/index.html",
         "baseHref": "/",
         "main": "apps/web/src/main.tsx",

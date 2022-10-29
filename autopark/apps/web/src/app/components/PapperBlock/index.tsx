@@ -15,7 +15,7 @@ interface Props {
   colorMode?: string;
   noMargin?: boolean;
   overflowX?: boolean;
-
+  showHeader?: boolean;
   actions?: () => any;
 }
 
@@ -38,7 +38,9 @@ export class PapperBlock extends Component<Props, State> {
         return classes.none;
     }
   };
-
+  static defaultProps = {
+    showHeader: true,
+  };
   override render() {
     const {
       desc,
@@ -51,6 +53,7 @@ export class PapperBlock extends Component<Props, State> {
       overflowX,
       whiteBg,
       actions,
+      showHeader,
     } = this.props;
     return (
       <div>
@@ -58,20 +61,32 @@ export class PapperBlock extends Component<Props, State> {
           className={classNames(classes.root, noMargin && classes.noMargin, this.color(colorMode))}
           elevation={0}
         >
-          <div className={classes.descBlock}>
-            <span className={classes.iconTitle}>
-              <Icon>{icon}</Icon>
-            </span>
-            <div className={classes.titleText}>
-              <Typography variant="h6" component="h2" className={classes.title}>
-                {title}
-              </Typography>
-              <Typography component="p" className={classes.description}>
-                {desc}
-              </Typography>
+          {showHeader ? (
+            <div className={classes.descBlock}>
+              {icon ? (
+                <span className={classes.iconTitle}>
+                  <Icon>{icon}</Icon>
+                </span>
+              ) : null}
+              {title || desc ? (
+                <div className={classes.titleText}>
+                  {title ? (
+                    <Typography variant="h6" component="h2" className={classes.title}>
+                      {title}
+                    </Typography>
+                  ) : null}
+                  {title ? (
+                    <Typography component="p" className={classes.description}>
+                      {desc}
+                    </Typography>
+                  ) : null}
+                </div>
+              ) : null}
+              {actions ? (
+                <div className={classes.titleButton}>{actions ? actions() : null}</div>
+              ) : null}
             </div>
-            <div className={classes.titleButton}>{actions ? actions() : null}</div>
-          </div>
+          ) : null}
           <section
             className={classNames(
               classes.content,
