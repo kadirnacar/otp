@@ -77,7 +77,7 @@ func startWs(addr string) {
 					// loadConfig2(json)
 					startOvif()
 					go serveStreams()
-					// go startRecorder()
+					go startRecorder()
 				} else if tmp.Command == "close" {
 					os.Exit(0)
 				}

@@ -1,6 +1,6 @@
 module kadirnacar.com/otp
 
-go 1.18
+go 1.19
 
 require github.com/deepch/vdk v0.0.19
 

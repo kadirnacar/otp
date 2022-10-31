@@ -7,7 +7,6 @@ import (
 	"crypto/rand"
 	"encoding/hex"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"time"
@@ -79,7 +78,11 @@ func startRecorder() {
 
 	var fullFileName = t.Format("02-01-2006-15-04-05-07") + ".mp4"
 	var file, err = os.Create(pathCam + "/" + fullFileName)
-
+	path, err := os.Getwd()
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(path, pathCam, fullFileName)
 	if err != nil {
 		log.Println("File not created")
 		return
@@ -96,7 +99,7 @@ func startRecorder() {
 	}
 
 	file.Write(bufCodec)
-	// file.Sync()
+	file.Sync()
 
 	var files = make([]*os.File, len(Config.Recording.Paths))
 
@@ -148,23 +151,26 @@ func startRecorder() {
 				if !videoStart && !AudioOnly {
 					continue
 				}
-				data := pck.Data
+				// data := pck.Data
 				b, buf, err := muxerMp4.WritePacket(pck, false)
-				if pic, err := FrameDecoderSingle.Decode(data); err == nil && pic != nil {
-					analysisImage(pic.Image)
-					if (pck.Time.Milliseconds() - start2.Milliseconds()) >= Config.Recording.AiDuration {
-						start2 = pck.Time
-						// go analysisImage(pic.Image)
-					}
-				} else {
-					log.Println("decode:", err)
-				}
 
 				if err == nil && b {
 
+					if pic, err2 := FrameDecoderSingle.Decode(pck.Data); err2 == nil && pic != nil {
+						// analysisImage(pic.Image)
+						if (pck.Time.Milliseconds() - start2.Milliseconds()) >= Config.Recording.AiDuration {
+							start2 = pck.Time
+							// go analysisImage(pic.Image)
+						}
+					} else {
+						// log.Println("decode:")
+					}
+
 					file.Write(buf)
+					file.Sync()
 					for _, fl := range files {
 						fl.Write(buf)
+						fl.Sync()
 					}
 
 					if pck.Time.Milliseconds() == 0 {
@@ -176,21 +182,20 @@ func startRecorder() {
 
 						start = pck.Time
 
-						file.Sync()
 						file.Close()
 
-						if Config.Recording.Encrypted {
-							dat, err := ioutil.ReadFile(file.Name())
-							if err == nil {
-								flc, err := os.Create(pathCam + "/" + fullFileName + ".bin")
+						// if Config.Recording.Encrypted {
+						// 	dat, err := ioutil.ReadFile(file.Name())
+						// 	if err == nil {
+						// 		flc, err := os.Create(pathCam + "/" + fullFileName + ".bin")
 
-								if err == nil {
-									flc.Write(encrypt(dat, "deneme"))
-									flc.Sync()
-									flc.Close()
-								}
-							}
-						}
+						// 		if err == nil {
+						// 			flc.Write(encrypt(dat, "deneme"))
+						// 			flc.Sync()
+						// 			flc.Close()
+						// 		}
+						// 	}
+						// }
 						// dat, err := ioutil.ReadFile(file.)
 
 						for _, fl := range files {
@@ -207,10 +212,12 @@ func startRecorder() {
 							return
 						}
 
-						// muxerMp4 := mp4.NewMuxer(file)
-						// muxerMp4.WriteHeader(codecs)
-						// _, buf := muxerMp4.GetInit(codecs)
+						muxerMp4 = mp4.NewMuxer(file)
+						muxerMp4.WriteHeader(codecs)
+						_, bufCodec = muxerMp4.GetInit(codecs)
+						log.Println("init")
 						file.Write(bufCodec)
+						file.Sync()
 
 						for index, element := range Config.Recording.Paths {
 							pathCam := element + "/"
