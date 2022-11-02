@@ -29,6 +29,7 @@ export default class WebSocketService {
           streams: { disable_audio: true, on_demand: false },
           recording: {
             camurl: `http://${device.url}/onvif/device_service`,
+            deviceurl: device.url,
             campassword: device.username,
             camusername: device.password,
             aiduration: 1000,
@@ -45,13 +46,8 @@ export default class WebSocketService {
 
         ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
           try {
-            const dataJson = JSON.parse(data.toString());
             if (this.clients['admin']) {
-              if (dataJson.command == 'answer') {
-                this.clients['admin'].ws.send(data.toString());
-              } else if (dataJson.command == 'detect') {
-                this.clients['admin'].ws.send(data.toString());
-              }
+              this.clients['admin'].ws.send(data.toString());
             }
           } catch (err) {
             console.log('client on msg:', err);

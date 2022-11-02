@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/LdDl/go-darknet"
+	"github.com/openalpr/openalpr/src/bindings/go/openalpr"
 	goonvif "source.smiproject.co/forks/go-onvif"
 )
 
@@ -18,9 +19,10 @@ var (
 		WeightsFile:              "assets/yolov7-tiny.weights",
 		Threshold:                .25,
 	}
-	rtspUrl     string
-	ovfDevice   goonvif.Device
-	profileToke string
+	alpr         openalpr.Alpr
+	rtspUrl      string
+	ovfDevice    goonvif.Device
+	profileToken string
 )
 
 func startOvif() {
@@ -58,14 +60,15 @@ func startOvif() {
 			time.Sleep(1 * time.Second)
 			continue
 		}
-		profileToke = profiles[0].Token
+		profileToken = profiles[0].Token
 		uri, err := ovfDevice.GetStreamURI(profiles[0].Token, "RTSP")
 		if err != nil {
 			log.Println("onvif getstreamuri:", err)
 			time.Sleep(1 * time.Second)
 			continue
 		}
-		rtspUrl = strings.Replace(uri.URI, "192.168.1.108", "admin:admin@192.168.1.108", -1)
+		rtspUrl = strings.Replace(uri.URI, Config.Recording.DeviceUrl, Config.Recording.CameraUsername+":"+Config.Recording.CameraPassword+"@"+Config.Recording.DeviceUrl, -1)
+		// rtspUrl = strings.Replace(uri.URI, "192.168.1.108", "admin:admin@192.168.1.108", -1)
 		Config.Streams.URL = rtspUrl
 		if err := n.Init(); err != nil {
 			log.Println("onvif darknet init:", err)
@@ -73,6 +76,17 @@ func startOvif() {
 			continue
 		}
 		log.Println("Onvif connected")
+
+		alpr := openalpr.NewAlpr("us", "", "assets/runtime_data")
+
+		if !alpr.IsLoaded() {
+			log.Println("OpenAlpr failed to load!")
+			return
+		}
+		alpr.SetTopN(20)
+
+		log.Println("alpr loaded:", alpr.IsLoaded())
+		log.Println("alpr version:", openalpr.GetVersion())
 		break
 	}
 

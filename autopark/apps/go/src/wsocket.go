@@ -85,6 +85,11 @@ func startWs(addr string, camId string) {
 					if err == nil {
 						go setOnvifConfig(val)
 					}
+				} else if tmp.Command == "snapshot" {
+					go func() {
+						snapUrl, _ := ovfDevice.GetSnapshot(profileToken)
+						sendMessage(WsMessage{Command: "snapshot", Data: snapUrl})
+					}()
 				}
 			}
 		}

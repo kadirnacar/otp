@@ -82,9 +82,9 @@ class Home extends Component<Props, State, typeof BAContext> {
           <Button
             onClick={() => {
               this.context.machine?.socketService?.send({
-                Command: 'config',
+                Command: 'snapshot',
                 To: cam?.id,
-                Data: this.state.val.toString(),
+                Data: "",
               });
             }}
           >

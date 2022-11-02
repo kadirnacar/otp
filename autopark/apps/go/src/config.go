@@ -46,6 +46,7 @@ type Recording struct {
 	AiDuration     int64    `json:"aiduration"`
 	SaveDuration   int64    `json:"saveduration"`
 	CameraUrl      string   `json:"camurl"`
+	DeviceUrl      string   `json:"deviceurl"`
 	CameraUsername string   `json:"camusername"`
 	CameraPassword string   `json:"campassword"`
 }
