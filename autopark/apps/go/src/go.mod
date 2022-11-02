@@ -12,8 +12,6 @@ require (
 require (
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/google/uuid v1.3.0 // indirect
-	github.com/jpillora/backoff v1.0.0 // indirect
-	github.com/openalpr/openalpr v2.3.0+incompatible
 	github.com/pion/datachannel v1.5.2 // indirect
 	github.com/pion/dtls/v2 v2.1.5 // indirect
 	github.com/pion/ice/v2 v2.2.6 // indirect
@@ -31,7 +29,6 @@ require (
 	github.com/pion/turn/v2 v2.0.8 // indirect
 	github.com/pion/udp v0.1.1 // indirect
 	github.com/pion/webrtc/v3 v3.1.42 // indirect
-	github.com/recws-org/recws v1.4.0 // indirect
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d // indirect
 	golang.org/x/image v0.0.0-20211028202545-6944b10bf410 // indirect
 	golang.org/x/net v0.0.0-20220708220712-1185a9018129 // indirect

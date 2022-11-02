@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/LdDl/go-darknet"
-	"github.com/openalpr/openalpr/src/bindings/go/openalpr"
 	goonvif "source.smiproject.co/forks/go-onvif"
 )
 
@@ -19,7 +18,6 @@ var (
 		WeightsFile:              "assets/yolov7-tiny.weights",
 		Threshold:                .25,
 	}
-	alpr         openalpr.Alpr
 	rtspUrl      string
 	ovfDevice    goonvif.Device
 	profileToken string
@@ -77,16 +75,6 @@ func startOvif() {
 		}
 		log.Println("Onvif connected")
 
-		alpr := openalpr.NewAlpr("us", "", "assets/runtime_data")
-
-		if !alpr.IsLoaded() {
-			log.Println("OpenAlpr failed to load!")
-			return
-		}
-		alpr.SetTopN(20)
-
-		log.Println("alpr loaded:", alpr.IsLoaded())
-		log.Println("alpr version:", openalpr.GetVersion())
 		break
 	}
 
