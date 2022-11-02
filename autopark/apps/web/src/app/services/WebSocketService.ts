@@ -20,7 +20,6 @@ export class WebSocketService extends EventEmitter {
     this.socket.addEventListener('message', (event) => {
       // var bytes = CryptoJS.AES.decrypt(messageString, this.reference);
       // var message = bytes.toString(CryptoJS.enc.Utf8);
-      console.log('websocket message', event.data);
       this.listeners('message').forEach(async (x) => await x(event.data));
     });
 

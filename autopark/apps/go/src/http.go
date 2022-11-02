@@ -11,6 +11,8 @@ type JCodec struct {
 	Type string
 }
 
+var muxerWebRTC *webrtc.Muxer
+
 func HTTPAPIServerStreamWebRTC(data string) {
 	if !Config.ext() {
 		log.Println("Stream Not Found")
@@ -27,7 +29,7 @@ func HTTPAPIServerStreamWebRTC(data string) {
 		AudioOnly = true
 	}
 
-	muxerWebRTC := webrtc.NewMuxer(webrtc.Options{ICEServers: Config.GetICEServers(), ICEUsername: Config.GetICEUsername(), ICECredential: Config.GetICECredential(), PortMin: Config.GetWebRTCPortMin(), PortMax: Config.GetWebRTCPortMax()})
+	muxerWebRTC = webrtc.NewMuxer(webrtc.Options{ICEServers: Config.GetICEServers(), ICEUsername: Config.GetICEUsername(), ICECredential: Config.GetICECredential()})
 	answer, err := muxerWebRTC.WriteHeader(codecs, data)
 	if err != nil {
 		log.Println("WriteHeader", err)

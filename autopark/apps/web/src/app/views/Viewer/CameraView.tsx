@@ -54,9 +54,7 @@ class CameraView extends Component<Props, State, typeof BAContext> {
   override async componentDidMount() {
     this.context.machine?.socketService?.addListener('message', (data) => {
       try {
-        console.log(data, this.pc);
         const dataJson = JSON.parse(data.toString());
-        console.log(dataJson, this.pc);
         if (dataJson.command == 'answer' && this.pc) {
           const buf = atob(dataJson.data);
           this.pc.setRemoteDescription(

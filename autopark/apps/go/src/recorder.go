@@ -169,7 +169,7 @@ func startRecorder() {
 					if err2 == nil && pic != nil {
 						log.Println("decode")
 						// analysisImage(pic.Image)
-						// go analysisImage(pic.Image)
+						go analysisImage(pic.Image)
 					} else {
 						// log.Println("decode err:", err2)
 					}

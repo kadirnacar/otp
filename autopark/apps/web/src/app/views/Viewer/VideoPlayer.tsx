@@ -1,6 +1,7 @@
 import { Camera } from '@autopark/models';
 import { CircularProgress } from '@mui/material';
 import React, { Component } from 'react';
+import { BAContext } from '../../utils';
 import { CameraManagement } from './CameraManagement';
 
 type Props = {
@@ -12,7 +13,7 @@ type State = {
   loaded: boolean;
 };
 
-export default class VideoPlayer extends Component<Props, State> {
+export default class VideoPlayer extends Component<Props, State, typeof BAContext> {
   constructor(props) {
     super(props);
 
@@ -24,6 +25,9 @@ export default class VideoPlayer extends Component<Props, State> {
     };
   }
 
+  static override contextType = BAContext;
+
+  override context!: React.ContextType<typeof BAContext>;
   static defaultProps = {
     boxes: [],
     searchBoxes: [],
@@ -40,6 +44,21 @@ export default class VideoPlayer extends Component<Props, State> {
       this.cameraManagement.onVideoLoaded = () => {
         this.setState({ loaded: true });
       };
+
+      this.context.machine?.socketService?.addListener('message', (data) => {
+        try {
+          const dataJson = JSON.parse(data.toString());
+          if (dataJson.command == 'detect') {
+            const boxes = JSON.parse(dataJson.data);
+            if (this.cameraManagement) {
+              this.cameraManagement.setBoxes(boxes);
+            }
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      });
+
       this.cameraManagement.init();
     }
   }

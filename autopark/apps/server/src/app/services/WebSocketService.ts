@@ -46,9 +46,12 @@ export default class WebSocketService {
         ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
           try {
             const dataJson = JSON.parse(data.toString());
-            console.log('answer', data.toString());
-            if (dataJson.command == 'answer') {
-              this.clients['admin'].ws.send(data.toString());
+            if (this.clients['admin']) {
+              if (dataJson.command == 'answer') {
+                this.clients['admin'].ws.send(data.toString());
+              } else if (dataJson.command == 'detect') {
+                this.clients['admin'].ws.send(data.toString());
+              }
             }
           } catch (err) {
             console.log('client on msg:', err);

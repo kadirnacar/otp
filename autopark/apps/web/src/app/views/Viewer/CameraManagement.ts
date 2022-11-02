@@ -9,9 +9,15 @@ export class CameraManagement {
   canvas: HTMLCanvasElement;
   video: HTMLVideoElement;
   onVideoLoaded?: () => void;
+  boxes: any[] = [];
 
   async init() {
     this.video.addEventListener('loadeddata', this.handleVideoLoadeddata.bind(this));
+  }
+
+  setBoxes(boxes) {
+    console.log(boxes);
+    this.boxes = boxes;
   }
 
   stop() {
@@ -57,8 +63,27 @@ export class CameraManagement {
       if (this.ctx && this.video) {
         this.ctx.clearRect(0, 0, this.video.videoWidth, this.video.videoHeight);
         this.ctx.drawImage(this.video, 0, 0, this.video.videoWidth, this.video.videoHeight);
-      }
 
+        for (let index = 0; index < this.boxes.length; index++) {
+          const element = this.boxes[index];
+          this.ctx.beginPath();
+          this.ctx.lineWidth = 5;
+          this.ctx.strokeStyle = 'red';
+          this.ctx.font = '30px Arial';
+          this.ctx.fillText(
+            element.ClassNames[0],
+            element.StartPoint.X + 10,
+            element.StartPoint.Y + 30
+          );
+          this.ctx.rect(
+            element.StartPoint.X,
+            element.StartPoint.Y,
+            element.EndPoint.X - element.StartPoint.X,
+            element.EndPoint.Y - element.StartPoint.Y
+          );
+          this.ctx.stroke();
+        }
+      }
       this.last2 = timeInSecond;
     }
     this.drawAnimate = requestAnimationFrame(this.drawVideoToCanvas);
