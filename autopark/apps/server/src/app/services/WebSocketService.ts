@@ -47,7 +47,9 @@ export default class WebSocketService {
         ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
           try {
             if (this.clients['admin']) {
-              this.clients['admin'].ws.send(data.toString());
+              const dataJson = JSON.parse(data.toString());
+              dataJson.From = id;
+              this.clients['admin'].ws.send(JSON.stringify(dataJson));
             }
           } catch (err) {
             console.log('client on msg:', err);
