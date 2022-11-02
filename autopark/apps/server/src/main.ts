@@ -8,6 +8,8 @@ import * as http from 'http';
 import WebSocketService from './app/services/WebSocketService';
 import { DataRouter } from './app/routers/data';
 import { environment } from './environments/environment';
+import './app/services';
+import { CameraRouter } from './app/routers/camera';
 
 const app = express();
 const port = environment.port;
@@ -15,6 +17,7 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server, path: '/ws' });
 const socketService = new WebSocketService(wss);
 const dataRouter = new DataRouter();
+const cameraRouter = new CameraRouter();
 
 function corsPrefetch(req: Request, res: express.Response, next: Function) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -36,6 +39,7 @@ app.use(corsPrefetch as any);
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api', dataRouter.router);
+app.use('/api/camera', cameraRouter.router);
 
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'web', '/index.html'));

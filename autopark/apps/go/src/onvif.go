@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"image"
 	"log"
 	"strings"
@@ -12,49 +11,55 @@ import (
 	goonvif "source.smiproject.co/forks/go-onvif"
 )
 
-var n = darknet.YOLONetwork{
-	GPUDeviceIndex:           0,
-	NetworkConfigurationFile: "yolov7-tiny.cfg",
-	WeightsFile:              "yolov7-tiny.weights",
-	Threshold:                .25,
-}
-var rtspUrl string
+var (
+	n = darknet.YOLONetwork{
+		GPUDeviceIndex:           0,
+		NetworkConfigurationFile: "assets/yolov7-tiny.cfg",
+		WeightsFile:              "assets/yolov7-tiny.weights",
+		Threshold:                .25,
+	}
+	rtspUrl     string
+	ovfDevice   goonvif.Device
+	profileToke string
+)
 
-func startOvif() string {
+func startOvif() {
 
 	log.Println("GetStreamURI")
 
-	ovfDevice := goonvif.Device{
+	ovfDevice = goonvif.Device{
 		XAddr:    Config.Recording.CameraUrl,
 		User:     Config.Recording.CameraUsername,
 		Password: Config.Recording.CameraPassword,
 	}
+
 	for {
 		log.Println("Connect Onvif")
 		var err error
 
-		caps, err := ovfDevice.GetCapabilities()
+		// caps, err := ovfDevice.GetCapabilities()
 
-		if err != nil {
-			fmt.Printf("Get cap error %s\n", err.Error())
+		// if err != nil {
+		// 	fmt.Printf("Get cap error %s\n", err.Error())
 
-			time.Sleep(1 * time.Second)
-			continue
-		}
+		// 	time.Sleep(1 * time.Second)
+		// 	continue
+		// }
 
-		ovfMedia := goonvif.Device{
-			XAddr:    caps.Media.XAddr,
-			User:     ovfDevice.User,
-			Password: ovfDevice.Password,
-		}
+		// ovfMedia := goonvif.Device{
+		// 	XAddr:    caps.Media.XAddr,
+		// 	User:     ovfDevice.User,
+		// 	Password: ovfDevice.Password,
+		// }
 
-		profiles, err := ovfMedia.GetProfiles()
+		profiles, err := ovfDevice.GetProfiles()
 		if err != nil {
 			log.Println("onvif profiles:", err)
 			time.Sleep(1 * time.Second)
 			continue
 		}
-		uri, err := ovfMedia.GetStreamURI(profiles[0].Token, "RTSP")
+		profileToke = profiles[0].Token
+		uri, err := ovfDevice.GetStreamURI(profiles[0].Token, "RTSP")
 		if err != nil {
 			log.Println("onvif getstreamuri:", err)
 			time.Sleep(1 * time.Second)
@@ -67,15 +72,35 @@ func startOvif() string {
 			time.Sleep(1 * time.Second)
 			continue
 		}
-
 		log.Println("Onvif connected")
 		break
 	}
 
 	// defer n.Close()
+	go serveStreams()
+	go startRecorder()
 
-	return rtspUrl
+}
 
+func setOnvifConfig(val int) {
+	log.Println("set config:", val)
+	configs, err := ovfDevice.GetVideoEncoderConfigurations()
+	if err != nil {
+		log.Println("onvif get encode:", err)
+	} else {
+		for _, d := range configs {
+			nd := d
+			nd.H264.GovLength = val
+			err2, resp := ovfDevice.SetVideoEncoderConfiguration(nd)
+
+			// var drf = ovfDevice.SetVideoEncoderConfiguration(goonvif.VideoEncoderConfig{Token: d.Token, H264: goonvif.H264Configuration{GovLength: val}})
+			xm, _ := resp.Xml()
+			log.Printf("Get cap error %s\n", xm)
+			if err2 != nil {
+				log.Println("onvif set encode:", err2)
+			}
+		}
+	}
 }
 
 func analysisImage(image image.YCbCr) {

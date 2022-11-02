@@ -10,5 +10,11 @@ export default [
     name: 'Ayarlar',
     icon: 'settings',
     link: '/settings',
-  }
+  },
+  {
+    key: 'add_camera',
+    name: 'Cameras',
+    icon: 'settings_brightness',
+    link: '/cameras',
+  },
 ];

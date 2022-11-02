@@ -78,11 +78,11 @@ func startRecorder() {
 
 	var fullFileName = t.Format("02-01-2006-15-04-05-07") + ".mp4"
 	var file, err = os.Create(pathCam + "/" + fullFileName)
-	path, err := os.Getwd()
+
 	if err != nil {
 		log.Println(err)
 	}
-	log.Println(path, pathCam, fullFileName)
+
 	if err != nil {
 		log.Println("File not created")
 		return
@@ -90,13 +90,21 @@ func startRecorder() {
 	muxerMp4 := mp4.NewMuxer(file)
 	muxerMp4.WriteHeader(codecs)
 	var _, bufCodec = muxerMp4.GetInit(codecs)
+	var FrameDecoderSingle *ffmpeg.VideoDecoder = nil
 
-	var FrameDecoderSingle *ffmpeg.VideoDecoder
-
-	FrameDecoderSingle, err = ffmpeg.NewVideoDecoder(codecs[0].(av.VideoCodecData))
-	if err != nil {
-		log.Println("FrameDecoderSingle Error", err)
+	for _, element := range codecs {
+		if element.Type().IsVideo() {
+			FrameDecoderSingle, err = ffmpeg.NewVideoDecoder(element.(av.VideoCodecData))
+			if err != nil {
+				log.Println("FrameDecoderSingle Error", err)
+			}
+		}
 	}
+
+	// FrameDecoderSingle, err = ffmpeg.NewVideoDecoder(codecs[0].(av.VideoCodecData))
+	// if err != nil {
+	// 	log.Println("FrameDecoderSingle Error", err)
+	// }
 
 	file.Write(bufCodec)
 	file.Sync()
@@ -135,7 +143,7 @@ func startRecorder() {
 		noVideo := time.NewTimer(10 * time.Second)
 		var start time.Duration = 0
 
-		var start2 time.Duration = 0
+		// var start2 time.Duration = 0
 		for {
 			select {
 			case <-noVideo.C:
@@ -151,26 +159,32 @@ func startRecorder() {
 				if !videoStart && !AudioOnly {
 					continue
 				}
+
+				if FrameDecoderSingle != nil && pck.IsKeyFrame {
+					// if FrameDecoderSingle != nil && (pck.Time-start2).Milliseconds() >= Config.Recording.AiDuration {
+					// log.Println("isKeyframe:", pck.IsKeyFrame, (pck.Time - start2).Milliseconds())
+					// start2 = pck.Time
+					pic, err2 := FrameDecoderSingle.Decode(pck.Data)
+					// log.Println("start decode")
+					if err2 == nil && pic != nil {
+						log.Println("decode")
+						// analysisImage(pic.Image)
+						// go analysisImage(pic.Image)
+					} else {
+						// log.Println("decode err:", err2)
+					}
+				}
 				// data := pck.Data
 				b, buf, err := muxerMp4.WritePacket(pck, false)
 
 				if err == nil && b {
-
-					if pic, err2 := FrameDecoderSingle.Decode(pck.Data); err2 == nil && pic != nil {
-						// analysisImage(pic.Image)
-						if (pck.Time.Milliseconds() - start2.Milliseconds()) >= Config.Recording.AiDuration {
-							start2 = pck.Time
-							// go analysisImage(pic.Image)
-						}
-					} else {
-						// log.Println("decode:")
-					}
+					// log.Println("iskeyframe:", pck.IsKeyFrame, pck.CompositionTime)
 
 					file.Write(buf)
-					file.Sync()
+					// file.Sync()
 					for _, fl := range files {
 						fl.Write(buf)
-						fl.Sync()
+						// fl.Sync()
 					}
 
 					if pck.Time.Milliseconds() == 0 {
@@ -178,10 +192,10 @@ func startRecorder() {
 
 					}
 
-					if (pck.Time.Milliseconds() - start.Milliseconds()) >= Config.Recording.SaveDuration {
+					if (pck.Time - start).Milliseconds() >= Config.Recording.SaveDuration {
 
 						start = pck.Time
-
+						file.Sync()
 						file.Close()
 
 						// if Config.Recording.Encrypted {
@@ -215,7 +229,6 @@ func startRecorder() {
 						muxerMp4 = mp4.NewMuxer(file)
 						muxerMp4.WriteHeader(codecs)
 						_, bufCodec = muxerMp4.GetInit(codecs)
-						log.Println("init")
 						file.Write(bufCodec)
 						file.Sync()
 

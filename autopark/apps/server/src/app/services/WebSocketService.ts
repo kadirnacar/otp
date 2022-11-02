@@ -13,34 +13,64 @@ export default class WebSocketService {
       if (urlSplit && urlSplit.length > 1) {
         id = urlSplit.pop();
       }
+      console.log('Ws Client Connected :', id);
 
-      if (!id) {
-        ws.close();
-        return;
+      // if (!id) {
+      //   ws.close();
+      //   return;
+      // }
+      const idValue = parseInt(id);
+      await this.initClient(id, ws);
+
+      if (!isNaN(idValue)) {
+        const device = await this.getCamera(idValue);
+        var json = {
+          server: {},
+          streams: { disable_audio: true, on_demand: false },
+          recording: {
+            camurl: `http://${device.url}/onvif/device_service`,
+            campassword: device.username,
+            camusername: device.password,
+            aiduration: 1000,
+            saveduration: 60000,
+            path: './records',
+            paths: [],
+            encrypted: false,
+          },
+        };
+        ws.on('ping', (data) => {
+          ws.pong('pong');
+        });
+        ws.send(JSON.stringify({ Command: 'init', Data: JSON.stringify(json) }));
+
+        ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
+          try {
+            const dataJson = JSON.parse(data.toString());
+            console.log('answer', data.toString());
+            if (dataJson.command == 'answer') {
+              this.clients['admin'].ws.send(data.toString());
+            }
+          } catch (err) {
+            console.log('client on msg:', err);
+          }
+        });
+      } else if (id == 'admin') {
+        ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
+          try {
+            const dataJson = JSON.parse(data.toString());
+            if (dataJson.To != undefined) {
+              const to = this.clients[dataJson.To.toString()];
+              // console.log('to:', to);
+              if (to) {
+                console.log('send to:', dataJson.To, data.toString());
+                to.ws.send(data.toString());
+              }
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        });
       }
-      console.log('connected', id);
-
-      const device = await this.initClient(id, ws);
-      var json = {
-        server: {},
-        streams: { disable_audio: true, on_demand: false },
-        recording: {
-          camurl: 'http://192.168.1.108/onvif/device_service',
-          campassword: 'admin',
-          camusername: 'admin',
-          aiduration: 250,
-          saveduration: 10000,
-          path: './records',
-          paths: [],
-          encrypted: false,
-        },
-      };
-
-      ws.send(JSON.stringify({ Command: 'init', Data: JSON.stringify(json) }));
-
-      ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
-        console.log(isBinary, data.toString(), id);
-      });
 
       ws.on('close', () => {
         if (this.clients[id]) {
@@ -64,14 +94,14 @@ export default class WebSocketService {
   }
 
   async initClient(id, ws: WebSocket) {
-    if (this.clients[id]) {
-      return this.clients[id];
-    }
+    // if (this.clients[id]) {
+    //   return this.clients[id];
+    // }
 
     // let device = await this.getCamera(id);
 
     // const item = { ws, device };
 
-    this.clients[id] = {} as any;
+    this.clients[id] = { ws } as any;
   }
 }

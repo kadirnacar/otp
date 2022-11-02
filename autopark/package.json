@@ -4,14 +4,14 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx run-many --target=serve --projects=server,web",
+    "start": "nx run-many --target=serve --projects=go,server,web",
     "build": "nx run-many --target=build --projects=server,web,go",
     "test": "nx build server --with-deps --buildLibsFromSource",
     "prod": "nx run-many --target=build --projects=server,web,go --prod"
   },
   "private": true,
   "pkg": {
-    "scripts": "dist/**/*.js", 
+    "scripts": "dist/**/*.js",
     "assets": "dist/**/*",
     "targets": [
       "node14-linux-x64",
@@ -30,6 +30,7 @@
     "@mui/material": "^5.10.11",
     "@mui/styled-engine": "^5.10.8",
     "@mui/styles": "^5.10.10",
+    "body-parser": "1.20.1",
     "bourbon": "^7.2.0",
     "bourbon-neat": "^4.0.0",
     "classnames": "^2.3.2",
@@ -39,6 +40,7 @@
     "json-to-url": "^1.0.5",
     "jss": "^10.9.2",
     "jss-rtl": "^0.3.0",
+    "pg": "^8.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-grid-layout": "^1.3.4",
@@ -49,12 +51,11 @@
     "react-swipeable-views": "^0.14.0",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
+    "reflect-metadata": "0.1.13",
     "regenerator-runtime": "0.13.7",
     "sass-material-colors": "0.0.5",
     "tslib": "^2.3.0",
     "typeorm": "^0.3.10",
-    "body-parser": "1.20.1",
-    "reflect-metadata": "0.1.13",
     "webpack": "5.74.0",
     "webpack-node-externals": "3.0.0",
     "ws": "8.10.0"

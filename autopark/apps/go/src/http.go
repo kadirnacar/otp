@@ -1,8 +1,6 @@
 package main
 
 import (
-	"encoding/json"
-	"fmt"
 	"log"
 	"time"
 
@@ -35,20 +33,18 @@ func HTTPAPIServerStreamWebRTC(data string) {
 		log.Println("WriteHeader", err)
 		return
 	}
+	// defer muxerWebRTC.Close()
 
-	mapD := map[string]string{"answer": answer}
-	mapB, _ := json.Marshal(mapD)
-	fmt.Println(string(mapB))
-
+	sendMessage(WsMessage{Command: "answer", Data: answer})
 	if err != nil {
 		log.Println("Write", err)
 		return
 	}
 	go func() {
-		cid, ch := Config.clAd()
-		defer Config.clDe(cid)
-		defer Config.coDe()
-		defer muxerWebRTC.Close()
+		_, ch := Config.clAd()
+		// defer Config.clDe(cid)
+		// defer Config.coDe()
+		// defer muxerWebRTC.Close()
 		var videoStart bool
 		noVideo := time.NewTimer(10 * time.Second)
 		for {

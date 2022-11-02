@@ -141,6 +141,9 @@ func loadConfig2(data string) {
 	}
 	tmp.Streams.Cl = make(map[string]viewer)
 	Config = &tmp
+
+	go startOvif()
+
 }
 
 func loadConfig() *ConfigST {
