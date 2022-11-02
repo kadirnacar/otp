@@ -11,8 +11,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/deepch/vdk/av"
-	"github.com/deepch/vdk/cgo/ffmpeg"
 	mp4 "github.com/deepch/vdk/format/mp4f"
 )
 
@@ -90,21 +88,6 @@ func startRecorder() {
 	muxerMp4 := mp4.NewMuxer(file)
 	muxerMp4.WriteHeader(codecs)
 	var _, bufCodec = muxerMp4.GetInit(codecs)
-	var FrameDecoderSingle *ffmpeg.VideoDecoder = nil
-
-	for _, element := range codecs {
-		if element.Type().IsVideo() {
-			FrameDecoderSingle, err = ffmpeg.NewVideoDecoder(element.(av.VideoCodecData))
-			if err != nil {
-				log.Println("FrameDecoderSingle Error", err)
-			}
-		}
-	}
-
-	// FrameDecoderSingle, err = ffmpeg.NewVideoDecoder(codecs[0].(av.VideoCodecData))
-	// if err != nil {
-	// 	log.Println("FrameDecoderSingle Error", err)
-	// }
 
 	file.Write(bufCodec)
 	file.Sync()
@@ -160,21 +143,6 @@ func startRecorder() {
 					continue
 				}
 
-				if FrameDecoderSingle != nil && pck.IsKeyFrame {
-					// if FrameDecoderSingle != nil && (pck.Time-start2).Milliseconds() >= Config.Recording.AiDuration {
-					// log.Println("isKeyframe:", pck.IsKeyFrame, (pck.Time - start2).Milliseconds())
-					// start2 = pck.Time
-					pic, err2 := FrameDecoderSingle.Decode(pck.Data)
-					// log.Println("start decode")
-					if err2 == nil && pic != nil {
-						log.Println("decode")
-						// analysisImage(pic.Image)
-						go analysisImage(pic.Image)
-					} else {
-						// log.Println("decode err:", err2)
-					}
-				}
-				// data := pck.Data
 				b, buf, err := muxerMp4.WritePacket(pck, false)
 
 				if err == nil && b {
