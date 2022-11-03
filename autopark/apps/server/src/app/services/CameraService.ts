@@ -57,7 +57,7 @@ export class RtspReader extends EventEmitter {
         const msg: string = chunk.toString('utf8');
         console.log('std output:', msg);
 
-        if (msg.includes('Stream Codec Not Found')) {
+        if (msg.includes('Stream Codec Not Found') || msg.includes('panic:')) {
           this.answerData = null;
           this.isAlive = false;
           this.goProcess.kill();
@@ -71,7 +71,7 @@ export class RtspReader extends EventEmitter {
           // } else if (msg.includes('WebRTC Client Offline')) {
           //   goProcess.kill();
           //   await this.endProcess(goProcess);
-        } 
+        }
         // else if (msg.includes('noVideo')) {
         //   this.answerData = null;
         //   this.isAlive = false;

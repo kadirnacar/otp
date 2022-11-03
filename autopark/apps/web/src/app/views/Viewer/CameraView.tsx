@@ -52,22 +52,6 @@ class CameraView extends Component<Props, State, typeof BAContext> {
   }
 
   override async componentDidMount() {
-    this.context.machine?.socketService?.addListener('message', (data) => {
-      try {
-        const dataJson = JSON.parse(data.toString());
-        if (dataJson.command == 'answer' && this.pc) {
-          const buf = atob(dataJson.data);
-          this.pc.setRemoteDescription(
-            new RTCSessionDescription({
-              type: 'answer',
-              sdp: buf,
-            })
-          );
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    });
     if (this.props.camera?.id) {
       await CameraService.connect(this.props.camera?.id);
 
@@ -95,48 +79,10 @@ class CameraView extends Component<Props, State, typeof BAContext> {
         playing: true,
       },
       () => {
-        this.pc = new RTCPeerConnection({});
-
-        this.pc.onnegotiationneeded = async (ev) => {
-          if (this.pc) {
-            let offer = await this.pc.createOffer();
-            await this.pc.setLocalDescription(offer);
-            this.context.machine?.socketService?.send({
-              Command: 'rtsp',
-              To: this.props.camera?.id,
-              Data: btoa(this.pc.localDescription?.sdp || ''),
-            });
-            // const response = await fetch(
-            //   `http://${location.host}/api/camera/rtspgo/${this.props.camera?.id}`,
-            //   {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({
-            //       data: btoa(this.pc.localDescription?.sdp || ''),
-            //     }),
-            //   }
-            // );
-            // const data = await response.json();
-
-            // if (data && data.answer) {
-            //   this.pc.setRemoteDescription(
-            //     new RTCSessionDescription({
-            //       type: 'answer',
-            //       sdp: atob(data.answer),
-            //     })
-            //   );
-            // }
-          }
-        };
-        this.pc.addTransceiver('video', {
-          direction: 'sendrecv',
+        this.context.machine?.socketService?.send({
+          Command: 'rtsp',
+          To: this.props.camera?.id,
         });
-
-        this.pc.ontrack = (event) => {
-          let stream = new MediaStream();
-          stream.addTrack(event.track);
-          this.setState({ streamSource: stream });
-        };
       }
     );
   }
@@ -165,7 +111,7 @@ class CameraView extends Component<Props, State, typeof BAContext> {
             </div>
           ) : (
             <>
-              <VideoPlayer stream={this.state.streamSource} camera={this.props.camera} />
+              <VideoPlayer camera={this.props.camera} playing={this.state.playing} />
             </>
           )}
         </Grid>

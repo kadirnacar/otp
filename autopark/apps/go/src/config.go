@@ -25,6 +25,7 @@ var empty interface{}
 type WsMessage struct {
 	Command string `json:"command"`
 	Data    string `json:"data"`
+	Buffer  *[]byte
 }
 
 // ConfigST struct

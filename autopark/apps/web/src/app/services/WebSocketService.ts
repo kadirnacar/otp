@@ -20,7 +20,13 @@ export class WebSocketService extends EventEmitter {
     this.socket.addEventListener('message', (event) => {
       // var bytes = CryptoJS.AES.decrypt(messageString, this.reference);
       // var message = bytes.toString(CryptoJS.enc.Utf8);
-      this.listeners('message').forEach(async (x) => await x(event.data));
+      try {
+        if (event.data.constructor.name === 'Blob') {
+          this.listeners('stream').forEach(async (x) => await x(event.data));
+        } else {
+          this.listeners('message').forEach(async (x) => await x(event.data));
+        }
+      } catch {}
     });
 
     this.socket.addEventListener('close', (event) => {

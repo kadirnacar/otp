@@ -43,27 +43,48 @@ export default class WebSocketService {
           ws.pong('pong');
         });
         ws.send(JSON.stringify({ Command: 'init', Data: JSON.stringify(json) }));
-
+        ws.on('ping', () => {
+          ws.pong();
+        });
         ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
-          try {
-            if (this.clients['admin']) {
-              const dataJson = JSON.parse(data.toString());
-              dataJson.From = id;
-              this.clients['admin'].ws.send(JSON.stringify(dataJson));
+          if (!isBinary) {
+            try {
+              if (this.clients['admin']) {
+                const dataJson = JSON.parse(data.toString());
+                dataJson.From = id;
+                this.clients['admin'].ws.send(JSON.stringify(dataJson));
+              }
+            } catch (err) {
+              console.log('client on msg:', err);
             }
-          } catch (err) {
-            console.log('client on msg:', err);
+          } else {
+            try {
+              if (this.clients['admin']) {
+                this.clients['admin'].ws.send(data, { binary: true });
+              }
+            } catch (err) {
+              console.log('client on msg:', err);
+            }
           }
         });
       } else if (id == 'admin') {
+        ws.on('close', (code, reason) => {
+          const keys = Object.keys(this.clients);
+          for (let index = 0; index < keys.length; index++) {
+            const element = this.clients[keys[index]];
+            if (element && element.ws && keys[index] != 'admin') {
+              // element.ws.send(JSON.stringify({ command: 'close', data: '' }));
+              element.ws.close();
+              delete this.clients[id];
+            }
+          }
+        });
         ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
           try {
             const dataJson = JSON.parse(data.toString());
             if (dataJson.To != undefined) {
               const to = this.clients[dataJson.To.toString()];
-              // console.log('to:', to);
               if (to) {
-                console.log('send to:', dataJson.To, data.toString());
                 to.ws.send(data.toString());
               }
             }
@@ -76,7 +97,7 @@ export default class WebSocketService {
       ws.on('close', () => {
         if (this.clients[id]) {
           console.log('Ws Client Closed :', id);
-          delete this.clients[id];
+          // delete this.clients[id];
         }
       });
     });

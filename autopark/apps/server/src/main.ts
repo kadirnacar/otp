@@ -14,7 +14,7 @@ import { CameraRouter } from './app/routers/camera';
 const app = express();
 const port = environment.port;
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server, path: '/ws' });
+const wss = new WebSocket.Server({ path: '/ws', server});
 const socketService = new WebSocketService(wss);
 const dataRouter = new DataRouter();
 const cameraRouter = new CameraRouter();

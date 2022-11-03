@@ -14,6 +14,10 @@ import (
 	mp4 "github.com/deepch/vdk/format/mp4f"
 )
 
+var (
+	isStarted bool = false
+)
+
 func createHash(key string) string {
 	hasher := md5.New()
 	hasher.Write([]byte(key))
@@ -54,6 +58,10 @@ func decrypt(data []byte, passphrase string) []byte {
 }
 
 func startRecorder() {
+	if isStarted {
+		return
+	}
+	isStarted = true
 	if !Config.ext() {
 		log.Println("Stream Not Found")
 		return
@@ -131,7 +139,7 @@ func startRecorder() {
 			select {
 			case <-noVideo.C:
 
-				log.Println("noVideo")
+				log.Println("recorder noVideo")
 				continue
 
 			case pck := <-ch:
@@ -142,12 +150,10 @@ func startRecorder() {
 				if !videoStart && !AudioOnly {
 					continue
 				}
-
 				b, buf, err := muxerMp4.WritePacket(pck, false)
 
 				if err == nil && b {
 					// log.Println("iskeyframe:", pck.IsKeyFrame, pck.CompositionTime)
-
 					file.Write(buf)
 					// file.Sync()
 					for _, fl := range files {

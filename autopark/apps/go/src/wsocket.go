@@ -25,6 +25,15 @@ func sendMessage(msg WsMessage) {
 	}
 }
 
+func sendBuffer(buffer []byte) {
+	if conn != nil {
+		err := conn.WriteMessage(websocket.BinaryMessage, buffer)
+		if err != nil {
+			log.Println("send message:", err)
+		}
+	}
+}
+
 func connectApi(addr string, camId string) *websocket.Conn {
 	u := url.URL{Scheme: "ws", Host: addr, Path: "/ws", RawQuery: camId}
 	log.Printf("connecting to %s", u.String())
@@ -54,12 +63,34 @@ func startWs(addr string, camId string) {
 	go func() {
 		// defer conn.Close()
 		// defer close(done)
+		log.Println("socket open")
+		defer log.Println("socket close")
+		defer func() { go startWs(addr, camId) }()
 		for {
-			_, message, err := conn.ReadMessage()
+			// header, _, err := conn.NextReader()
+			// if err != nil {
+
+			// 	return
+			// }
+			// switch header {
+			// case websocket.:
+			// 	noClient.Reset(10 * time.Second)
+			// case ws.OpClose:
+			// 	return
+			// }
+
+			mtype, message, err := conn.ReadMessage()
+			if mtype == -1 {
+				log.Println("read: ", err)
+				controlExit <- true
+				time.Sleep(2 * time.Second)
+				conn = connectApi(addr, camId)
+				return
+			}
 			if err != nil {
 				log.Println("read: ", err)
 				time.Sleep(2 * time.Second)
-				conn = connectApi(addr, camId)
+				// conn = connectApi(addr, camId)
 				return
 			} else {
 				var tmp WsMessage
@@ -77,19 +108,25 @@ func startWs(addr string, camId string) {
 					// go serveStreams()
 					// go startRecorder()
 				} else if tmp.Command == "rtsp" {
-					go HTTPAPIServerStreamWebRTC(tmp.Data)
+					// go HTTPAPIServerStreamWebRTC(tmp.Data)
+					log.Println("start stream")
+					go startStreamWebsocket()
+					continue
 				} else if tmp.Command == "close" {
-					os.Exit(0)
+					go func() { controlExit <- true }()
+					continue
 				} else if tmp.Command == "config" {
 					val, err := strconv.Atoi(tmp.Data)
 					if err == nil {
 						go setOnvifConfig(val)
 					}
+					continue
 				} else if tmp.Command == "snapshot" {
 					go func() {
 						snapUrl, _ := ovfDevice.GetSnapshot(profileToken)
 						sendMessage(WsMessage{Command: "snapshot", Data: snapUrl})
 					}()
+					continue
 				}
 			}
 		}
