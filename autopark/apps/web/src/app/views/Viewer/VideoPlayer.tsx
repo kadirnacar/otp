@@ -101,6 +101,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
       }
     }
   };
+
   override componentDidUpdate(
     prevProps: Readonly<Props>,
     prevState: Readonly<State>,
@@ -110,6 +111,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
       this.playMse();
     }
   }
+
   override async componentDidMount() {
     if (this.canvas.current && this.video.current && this.props.camera) {
       this.cameraManagement = new CameraManagement(this.canvas.current, this.video.current);
@@ -170,6 +172,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
       this.cameraManagement.init();
     }
   }
+
   readPacket = (packet) => {
     if (!this.mseStreamingStarted && this.mseSourceBuffer) {
       this.mseSourceBuffer.appendBuffer(packet);
@@ -184,6 +187,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
   };
 
   override async componentWillUnmount() {
+    this.context.machine?.socketService?.send({ Command: 'close', To: this.props.camera?.id });
     if (this.cameraManagement) {
       this.cameraManagement.stop();
     }

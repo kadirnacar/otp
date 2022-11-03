@@ -13,7 +13,8 @@ import (
 )
 
 var (
-	conn *websocket.Conn
+	conn   *websocket.Conn
+	isInit bool = false
 )
 
 func sendMessage(msg WsMessage) {
@@ -34,101 +35,102 @@ func sendBuffer(buffer []byte) {
 	}
 }
 
-func connectApi(addr string, camId string) *websocket.Conn {
-	u := url.URL{Scheme: "ws", Host: addr, Path: "/ws", RawQuery: camId}
-	log.Printf("connecting to %s", u.String())
-
-	log.Println("reconnecting")
-	var err error
-	conn, _, err = websocket.DefaultDialer.Dial(u.String(), nil)
-	if err != nil {
-		log.Println("dial: ", err)
-		time.Sleep(1 * time.Second)
-	}
-
-	log.Println("API connected")
-
-	return conn
-}
-
 func startWs(addr string, camId string) {
 	interrupt := make(chan os.Signal, 1)
 	signal.Notify(interrupt, os.Interrupt)
 
-	// Connect to API
-	conn = connectApi(addr, camId)
-	// defer conn.Close()
+	u := url.URL{Scheme: "ws", Host: addr, Path: "/ws", RawQuery: camId}
+	log.Printf("connecting to %s", u.String())
 
-	// done := make(chan struct{})
+	var err error
+
+	conn, _, err = websocket.DefaultDialer.Dial(u.String(), nil)
+	if err != nil {
+		log.Fatal("dial:", err)
+	}
+	defer func() {
+		conn.Close()
+		startWs(addr, camId)
+	}()
+
+	done := make(chan struct{})
+
 	go func() {
-		// defer conn.Close()
-		// defer close(done)
-		log.Println("socket open")
-		defer log.Println("socket close")
-		defer func() { go startWs(addr, camId) }()
+		defer conn.Close()
+		defer close(done)
+		defer func() {
+			conn.Close()
+		}()
 		for {
-			// header, _, err := conn.NextReader()
-			// if err != nil {
-
-			// 	return
-			// }
-			// switch header {
-			// case websocket.:
-			// 	noClient.Reset(10 * time.Second)
-			// case ws.OpClose:
-			// 	return
-			// }
-
-			mtype, message, err := conn.ReadMessage()
-			if mtype == -1 {
-				log.Println("read: ", err)
-				controlExit <- true
-				time.Sleep(2 * time.Second)
-				conn = connectApi(addr, camId)
-				return
-			}
+			mType, message, err := conn.ReadMessage()
 			if err != nil {
-				log.Println("read: ", err)
-				time.Sleep(2 * time.Second)
-				// conn = connectApi(addr, camId)
+				log.Println("read:", err)
 				return
-			} else {
-				var tmp WsMessage
-				errJson := json.Unmarshal([]byte(message), &tmp)
-				if errJson != nil {
-					log.Println("Ws Message Parse Error:", err)
-					continue
-				}
-
-				if tmp.Command == "init" {
-					go loadConfig2(tmp.Data)
-					// var json = "{ \"server\": {}, \"streams\": { \"disable_audio\": true, \"on_demand\": false },\"recording\": {\"camurl\": \"http://192.168.1.108/onvif/device_service\" ,\"campassword\": \"admin\" ,\"camusername\": \"admin\" ,\"aiduration\": 250, \"saveduration\": 10000,\"path\": \"./records\",\"paths\": [],\"encrypted\": false}}"
-					// loadConfig2(json)
-					// go startOvif()
-					// go serveStreams()
-					// go startRecorder()
-				} else if tmp.Command == "rtsp" {
-					// go HTTPAPIServerStreamWebRTC(tmp.Data)
-					log.Println("start stream")
-					go startStreamWebsocket()
-					continue
-				} else if tmp.Command == "close" {
-					go func() { controlExit <- true }()
-					continue
-				} else if tmp.Command == "config" {
-					val, err := strconv.Atoi(tmp.Data)
-					if err == nil {
-						go setOnvifConfig(val)
-					}
-					continue
-				} else if tmp.Command == "snapshot" {
-					go func() {
-						snapUrl, _ := ovfDevice.GetSnapshot(profileToken)
-						sendMessage(WsMessage{Command: "snapshot", Data: snapUrl})
-					}()
-					continue
-				}
 			}
+			if mType == -1 {
+				return
+			}
+			var tmp WsMessage
+			errJson := json.Unmarshal([]byte(message), &tmp)
+			if errJson != nil {
+				log.Println("Ws Message Parse Error:", err)
+				continue
+			}
+
+			switch command := tmp.Command; command {
+			case "init":
+				if !isInit {
+					isInit = true
+					go loadConfig2(tmp.Data)
+				}
+			case "rtsp":
+				go startStreamWebsocket()
+			case "close":
+				return
+			case "config":
+				val, err := strconv.Atoi(tmp.Data)
+				if err == nil {
+					go setOnvifConfig(val)
+				}
+			case "snapshot":
+				go func() {
+					snapUrl, _ := ovfDevice.GetSnapshot(profileToken)
+					sendMessage(WsMessage{Command: "snapshot", Data: snapUrl})
+				}()
+			}
+			log.Printf("recv: %s", message)
 		}
 	}()
+
+	ticker := time.NewTicker(time.Second)
+	defer ticker.Stop()
+
+	for {
+		defer func() {
+			conn.Close()
+		}()
+		select {
+		case <-ticker.C:
+			err := conn.WriteControl(websocket.PingMessage, nil, time.Now().Add(2*time.Second))
+			if err != nil {
+				log.Println("write:", err)
+				return
+			}
+		case <-interrupt:
+			log.Println("interrupt")
+			// To cleanly close a connection, a client should send a close
+			// frame and wait for the server to close the connection.
+			err := conn.WriteMessage(websocket.CloseMessage, websocket.FormatCloseMessage(websocket.CloseNormalClosure, ""))
+			if err != nil {
+				log.Println("write close:", err)
+				return
+			}
+			select {
+			case <-done:
+			case <-time.After(time.Second):
+			}
+			conn.Close()
+			return
+		}
+	}
 }

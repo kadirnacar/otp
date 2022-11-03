@@ -48,7 +48,7 @@ class CameraView extends Component<Props, State, typeof BAContext> {
     }
     this.setState({ playing: false });
 
-    if (this.props.camera?.id) await CameraService.disconnect(this.props.camera?.id);
+    // if (this.props.camera?.id) await CameraService.disconnect(this.props.camera?.id);
   }
 
   override async componentDidMount() {
