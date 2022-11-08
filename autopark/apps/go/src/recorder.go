@@ -9,8 +9,11 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 	"time"
 
+	"github.com/deepch/vdk/av"
+	"github.com/deepch/vdk/cgo/ffmpeg"
 	mp4 "github.com/deepch/vdk/format/mp4f"
 )
 
@@ -100,6 +103,23 @@ func startRecorder() {
 	file.Write(bufCodec)
 	file.Sync()
 
+	var FrameDecoderSingle *ffmpeg.VideoDecoder
+
+	for _, element := range codecs {
+		if element.Type().IsVideo() {
+			FrameDecoderSingle, err = ffmpeg.NewVideoDecoder(element.(av.VideoCodecData))
+			if err != nil {
+				log.Fatalln("FrameDecoderSingle Error", err)
+			}
+		}
+
+	}
+
+	snapUrl, _ := ovfDevice.GetSnapshot(profileToken)
+	snapUrl = strings.Replace(snapUrl, Config.Recording.DeviceUrl, Config.Recording.CameraUsername+":"+Config.Recording.CameraPassword+"@"+Config.Recording.DeviceUrl, -1)
+
+	log.Println("snapUrl", snapUrl)
+
 	var files = make([]*os.File, len(Config.Recording.Paths))
 
 	for index, element := range Config.Recording.Paths {
@@ -150,15 +170,22 @@ func startRecorder() {
 				if !videoStart && !AudioOnly {
 					continue
 				}
+
+				if pck.IsKeyFrame {
+					// if (pck.Time - start2).Milliseconds() >= Config.Recording.AiDuration {
+					// start2 = pck.Time
+					if pic, err := FrameDecoderSingle.DecodeSingle(pck.Data); err == nil && pic != nil {
+						go analyseImage(pic.Image)
+					}
+					// go analyseImage(snapUrl)
+				}
+
 				b, buf, err := muxerMp4.WritePacket(pck, false)
 
 				if err == nil && b {
-					// log.Println("iskeyframe:", pck.IsKeyFrame, pck.CompositionTime)
 					file.Write(buf)
-					// file.Sync()
 					for _, fl := range files {
 						fl.Write(buf)
-						// fl.Sync()
 					}
 
 					if pck.Time.Milliseconds() == 0 {
@@ -171,20 +198,6 @@ func startRecorder() {
 						start = pck.Time
 						file.Sync()
 						file.Close()
-
-						// if Config.Recording.Encrypted {
-						// 	dat, err := ioutil.ReadFile(file.Name())
-						// 	if err == nil {
-						// 		flc, err := os.Create(pathCam + "/" + fullFileName + ".bin")
-
-						// 		if err == nil {
-						// 			flc.Write(encrypt(dat, "deneme"))
-						// 			flc.Sync()
-						// 			flc.Close()
-						// 		}
-						// 	}
-						// }
-						// dat, err := ioutil.ReadFile(file.)
 
 						for _, fl := range files {
 							fl.Sync()

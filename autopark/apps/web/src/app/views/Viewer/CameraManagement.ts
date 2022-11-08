@@ -16,7 +16,6 @@ export class CameraManagement {
   }
 
   setBoxes(boxes) {
-    console.log(boxes);
     this.boxes = boxes;
   }
 
@@ -64,25 +63,37 @@ export class CameraManagement {
         this.ctx.clearRect(0, 0, this.video.videoWidth, this.video.videoHeight);
         this.ctx.drawImage(this.video, 0, 0, this.video.videoWidth, this.video.videoHeight);
 
-        for (let index = 0; index < this.boxes.length; index++) {
-          const element = this.boxes[index];
-          this.ctx.beginPath();
-          this.ctx.lineWidth = 5;
-          this.ctx.strokeStyle = 'red';
-          this.ctx.font = '30px Arial';
-          this.ctx.fillText(
-            element.ClassNames[0],
-            element.StartPoint.X + 10,
-            element.StartPoint.Y + 30
-          );
-          this.ctx.rect(
-            element.StartPoint.X,
-            element.StartPoint.Y,
-            element.EndPoint.X - element.StartPoint.X,
-            element.EndPoint.Y - element.StartPoint.Y
-          );
-          this.ctx.stroke();
-        }
+        if (this.boxes)
+          for (let index = 0; index < this.boxes.length; index++) {
+            const element = this.boxes[index];
+            this.ctx.beginPath();
+            this.ctx.lineWidth = 5;
+
+            if (element.detects.ClassNames[0]) {
+              this.ctx.strokeStyle = 'red';
+              this.ctx.font = '20px Arial';
+              this.ctx.fillStyle = '#ff0000';
+              this.ctx.fillText(
+                element.text,
+                element.detects.StartPoint.X + 10,
+                element.detects.StartPoint.Y + 30
+              );
+              this.ctx.rect(
+                element.detects.StartPoint.X,
+                element.detects.StartPoint.Y,
+                element.detects.EndPoint.X - element.detects.StartPoint.X,
+                element.detects.EndPoint.Y - element.detects.StartPoint.Y
+              );
+            }
+
+            // this.ctx.rect(
+            //   element.Min.X,
+            //   element.Min.Y,
+            //   element.Max.X - element.Min.X,
+            //   element.Max.Y - element.Min.Y
+            // );
+            this.ctx.stroke();
+          }
       }
       this.last2 = timeInSecond;
     }

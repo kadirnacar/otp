@@ -20,6 +20,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
 
     this.video = React.createRef<HTMLVideoElement>();
     this.canvas = React.createRef<HTMLCanvasElement>();
+    this.img = React.createRef<HTMLImageElement>();
 
     this.state = {
       loaded: false,
@@ -35,6 +36,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
     selectedBoxIndex: -1,
   };
 
+  img: React.RefObject<HTMLImageElement>;
   video: React.RefObject<HTMLVideoElement>;
   canvas: React.RefObject<HTMLCanvasElement>;
   cameraManagement?: CameraManagement;
@@ -129,7 +131,14 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
           if (dataJson.command == 'detect') {
             const boxes = JSON.parse(dataJson.data);
             if (this.cameraManagement) {
+              boxes?.forEach((x) => console.log({ class: x.detects.ClassNames[0], text: x.text }));
               this.cameraManagement.setBoxes(boxes);
+            }
+          } else if (dataJson.command == 'image') {
+            if (this.img.current) {
+              // let utf8Encode = new TextEncoder();
+              // utf8Encode.encode(dataJson.Buffer);
+              this.img.current.src = 'data:image/png;base64, ' + dataJson.Buffer;
             }
           }
         } catch (err) {
@@ -245,6 +254,17 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
           }}
           ref={this.video}
         ></video>
+        <img
+          style={{
+            width: 'auto',
+            height: 'auto',
+            maxWidth: '100%',
+            maxHeight: '100%',
+            margin: 'auto',
+            position: 'absolute',
+          }}
+          ref={this.img}
+        ></img>
       </div>
     );
   }
