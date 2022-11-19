@@ -6,7 +6,7 @@ export const AppDataSource = new DataSource({
   // database: 'data.sqlite',
   type: 'postgres',
   host: 'localhost',
-  port: 5433,
+  port: 5432,
   username: 'otp',
   password: '123',
   database: 'otp',
