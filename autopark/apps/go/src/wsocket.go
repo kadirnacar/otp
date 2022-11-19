@@ -6,7 +6,6 @@ import (
 	"net/url"
 	"os"
 	"os/signal"
-	"strconv"
 	"time"
 
 	"github.com/gorilla/websocket"
@@ -87,11 +86,6 @@ func startWs(addr string, camId string) {
 				go startStreamWebsocket()
 			case "close":
 				return
-			case "config":
-				val, err := strconv.Atoi(tmp.Data)
-				if err == nil {
-					go setOnvifConfig(val)
-				}
 			case "snapshot":
 				go func() {
 					snapUrl, _ := ovfDevice.GetSnapshot(profileToken)
