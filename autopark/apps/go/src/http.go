@@ -80,11 +80,6 @@ func startStreamWebRTC(data string) {
 				err = muxerWebRTC.WritePacket(pck)
 				if err != nil {
 					log.Println("webrtc err:", err)
-					// mapErr := map[string]string{"error": err.Error()}
-					// mapErrJ, _ := json.Marshal(mapErr)
-					// fmt.Println(string(mapErrJ))
-					// os.Exit(3)
-					// return
 					return
 				}
 			}
@@ -152,12 +147,6 @@ func startStreamWebsocket() {
 				return
 			}
 			if ready {
-				// err := conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
-				// if err != nil {
-				// 	log.Println(err.Error())
-				// 	return
-				// }
-				//err = websocket.Message.Send(ws, buf)
 				sendBuffer(buf)
 			}
 		}

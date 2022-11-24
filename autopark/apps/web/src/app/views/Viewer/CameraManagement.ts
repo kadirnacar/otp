@@ -1,18 +1,40 @@
+// import { loadGraphModel } from '@tensorflow/tfjs-converter';
+import * as tf from '@tensorflow/tfjs';
+import '@tensorflow/tfjs-backend-webgl';
+import yolo from 'tfjs-yolo';
+
+// tf.setBackend('webgl');
+class L2 {
+  static className = 'L2';
+
+  constructor(config) {
+    return tf.regularizers.l1l2(config);
+  }
+}
+tf.serialization.registerClass(L2 as any);
+
 export class CameraManagement {
-  constructor(canvas: HTMLCanvasElement, video: HTMLVideoElement) {
+  constructor(canvas: HTMLCanvasElement, video: HTMLVideoElement, img: HTMLImageElement) {
     this.canvas = canvas;
     this.video = video;
+    this.img = img;
     this.drawVideoToCanvas = this.drawVideoToCanvas.bind(this);
   }
 
   videoLoaded = false;
+  img: HTMLImageElement;
   canvas: HTMLCanvasElement;
   video: HTMLVideoElement;
   onVideoLoaded?: () => void;
   boxes: any[] = [];
+  // model?: tf.LayersModel;
+  yoloDetect?;
 
   async init() {
     this.video.addEventListener('loadeddata', this.handleVideoLoadeddata.bind(this));
+    // this.model = await tf.loadLayersModel('/tfjs/model.json');
+    this.yoloDetect = await yolo.v3('/tfjs/model.json');
+    // console.log(this.model);
   }
 
   setBoxes(boxes) {
@@ -60,6 +82,29 @@ export class CameraManagement {
     let timeInSecond = timeStamp / 1000;
     if (timeInSecond - this.last2 >= this.speed2) {
       if (this.ctx && this.video) {
+        if (this.yoloDetect) {
+          // if (this.model) {
+          // const frame = tf.browser
+          //   .fromPixels(this.video)
+          //   // .resizeNearestNeighbor([608, 608])
+          //   // .toFloat()
+          //   .expandDims();
+
+          // // More pre-processing to be added here later
+
+          // let predictions = await this.model.predict(frame);
+
+          // // const resized = tf.image.resizeBilinear(frame, [608, 608]);
+          // // const expanded = tf.expandDims(resized, 0);
+          // // const prediction = this.model.predict(expanded);
+
+          // console.log(predictions);
+
+          this.yoloDetect.predict(this.video, {}).then((boxes) => {
+            console.log(boxes);
+          });
+        }
+
         this.ctx.clearRect(0, 0, this.video.videoWidth, this.video.videoHeight);
         this.ctx.drawImage(this.video, 0, 0, this.video.videoWidth, this.video.videoHeight);
 
@@ -98,5 +143,11 @@ export class CameraManagement {
       this.last2 = timeInSecond;
     }
     this.drawAnimate = requestAnimationFrame(this.drawVideoToCanvas);
+  }
+
+  async analyseVideo() {
+    // const model = await loadGraphModel(
+    //   'https://raw.githubusercontent.com/hugozanini/TFJS-object-detection/master/models/kangaroo-detector/model.json'
+    // );
   }
 }

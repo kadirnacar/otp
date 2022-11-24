@@ -26,14 +26,9 @@ func RTSPWorkerLoop(url string, OnDemand, DisableAudio, Debug bool) {
 		err := RTSPWorker(url, OnDemand, DisableAudio, Debug)
 		if err != nil {
 			Config.LastError = err
-			// Config.coDe(name)
-			// Config.RunUnlock(name)
-			// go RTSPWorkerLoop(name, url, OnDemand, DisableAudio, Debug)
-			// return err
 		}
 		if OnDemand && !Config.HasViewer() {
 			log.Println(ErrorStreamExitNoViewer)
-			// return
 		}
 		time.Sleep(1 * time.Second)
 	}

@@ -115,8 +115,12 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
   }
 
   override async componentDidMount() {
-    if (this.canvas.current && this.video.current && this.props.camera) {
-      this.cameraManagement = new CameraManagement(this.canvas.current, this.video.current);
+    if (this.canvas.current && this.video.current && this.props.camera && this.img.current) {
+      this.cameraManagement = new CameraManagement(
+        this.canvas.current,
+        this.video.current,
+        this.img.current
+      );
       this.cameraManagement.onVideoLoaded = () => {
         this.setState({ loaded: true });
       };
@@ -255,6 +259,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
           ref={this.video}
         ></video>
         <img
+          // src="https://learnopencv.com/wp-content/uploads/2022/03/car-on-road.jpg"
           style={{
             width: 'auto',
             height: 'auto',

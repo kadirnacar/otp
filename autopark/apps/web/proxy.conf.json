@@ -6,5 +6,9 @@
   "/lang": {
     "target": "http://localhost:3333",
     "secure": false
+  },
+  "/tfjs": {
+    "target": "http://localhost:3333",
+    "secure": false
   }
 }
