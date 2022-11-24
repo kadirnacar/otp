@@ -1,18 +1,12 @@
 package main
 
 import (
-	"bytes"
 	"encoding/json"
 	"image"
-	"image/jpeg"
 	"log"
-	"path/filepath"
 	"strings"
 	"time"
 
-	leptonica "gopkg.in/GeertJohan/go.leptonica.v1"
-
-	tesseract "github.com/GeertJohan/go.tesseract"
 	"github.com/LdDl/go-darknet"
 
 	goonvif "source.smiproject.co/forks/go-onvif"
@@ -29,20 +23,20 @@ var (
 	// }
 
 	// en iyi
-	n = darknet.YOLONetwork{
-		GPUDeviceIndex:           0,
-		NetworkConfigurationFile: "assets/work3/yolov4.cfg",
-		WeightsFile:              "assets/work3/yolov4.weights",
-		Threshold:                .50,
-	}
-
-	// iyi araba ve plaka
 	// n = darknet.YOLONetwork{
 	// 	GPUDeviceIndex:           0,
-	// 	NetworkConfigurationFile: "assets/work1/obj.cfg",
-	// 	WeightsFile:              "assets/work1/obj_60000.weights",
-	// 	Threshold:                .50,
+	// 	NetworkConfigurationFile: "assets/work3/yolov4.cfg",
+	// 	WeightsFile:              "assets/work3/yolov4.weights",
+	// 	Threshold:                .2,
 	// }
+
+	// iyi araba ve plaka
+	n = darknet.YOLONetwork{
+		GPUDeviceIndex:           0,
+		NetworkConfigurationFile: "assets/work1/obj.cfg",
+		WeightsFile:              "assets/work1/obj_60000.weights",
+		Threshold:                .2,
+	}
 
 	// buluyo ama karışık biraz
 	// n = darknet.YOLONetwork{
@@ -139,32 +133,32 @@ func analyseImage(img image.YCbCr) {
 	for _, d := range dr.Detections {
 
 		detects = append(detects, d)
-		imgDarknet2 := img.SubImage(image.Rect(d.StartPoint.X, d.StartPoint.Y, d.EndPoint.X, d.EndPoint.Y))
-		buf := new(bytes.Buffer)
-		jpeg.Encode(buf, imgDarknet2, nil)
-		send_s3 := buf.Bytes()
-		t, err := tesseract.NewTess(filepath.Join("/opt/homebrew/Cellar/tesseract/5.2.0/share", "tessdata"), "eng")
-		if err != nil {
-			log.Fatalf("Error while initializing Tess: %s\n", err)
-		}
-		defer t.Close()
+		// imgDarknet2 := img.SubImage(image.Rect(d.StartPoint.X, d.StartPoint.Y, d.EndPoint.X, d.EndPoint.Y))
+		// buf := new(bytes.Buffer)
+		// jpeg.Encode(buf, imgDarknet2, nil)
+		// send_s3 := buf.Bytes()
+		// t, err := tesseract.NewTess(filepath.Join("/opt/homebrew/Cellar/tesseract/5.2.0/share", "tessdata"), "eng")
+		// if err != nil {
+		// 	log.Fatalf("Error while initializing Tess: %s\n", err)
+		// }
+		// defer t.Close()
 
-		pix, err := leptonica.NewPixReadMem(&send_s3)
-		if err != nil {
-			log.Fatalf("Error while getting pix from file: %s\n", err)
-		}
-		defer pix.Close()
+		// pix, err := leptonica.NewPixReadMem(&send_s3)
+		// if err != nil {
+		// 	log.Fatalf("Error while getting pix from file: %s\n", err)
+		// }
+		// defer pix.Close()
 
-		t.SetPageSegMode(tesseract.PSM_AUTO_OSD)
+		// t.SetPageSegMode(tesseract.PSM_AUTO_OSD)
 
-		err = t.SetVariable("tessedit_char_whitelist", ` 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`+"`")
-		if err != nil {
-			log.Fatalf("Failed to SetVariable: %s\n", err)
-		}
+		// err = t.SetVariable("tessedit_char_whitelist", ` 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz`+"`")
+		// if err != nil {
+		// 	log.Fatalf("Failed to SetVariable: %s\n", err)
+		// }
 
-		t.SetImagePix(pix)
+		// t.SetImagePix(pix)
 
-		a := DetextMsg{Text: t.Text(), Detects: d}
+		a := DetextMsg{Text: "", Detects: d}
 		detectmsg = append(detectmsg, a)
 	}
 	data, err := json.Marshal(detectmsg)

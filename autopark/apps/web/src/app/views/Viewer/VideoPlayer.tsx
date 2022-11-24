@@ -253,6 +253,9 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
             height: 0,
           }}
           ref={this.video}
+          onPause={() => {
+            console.log('pause');
+          }}
         ></video>
         <img
           style={{

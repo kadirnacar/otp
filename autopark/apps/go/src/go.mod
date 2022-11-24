@@ -3,11 +3,11 @@ module otp
 go 1.18
 
 require (
-	github.com/GeertJohan/go.leptonica v0.0.0-20141028105504-69e757e167e0
 	github.com/GeertJohan/go.tesseract v0.0.0-20160811093044-23c094222808
 	github.com/LdDl/go-darknet v1.3.7
 	github.com/deepch/vdk v0.0.19
 	github.com/gorilla/websocket v1.5.0
+	gopkg.in/GeertJohan/go.leptonica.v1 v1.0.0-20141028105504-69e757e167e0
 	source.smiproject.co/forks/go-onvif v1.0.9
 )
 
@@ -35,5 +35,4 @@ require (
 	golang.org/x/image v0.0.0-20211028202545-6944b10bf410 // indirect
 	golang.org/x/net v0.0.0-20220708220712-1185a9018129 // indirect
 	golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8 // indirect
-	gopkg.in/GeertJohan/go.leptonica.v1 v1.0.0-20141028105504-69e757e167e0 // indirect
 )

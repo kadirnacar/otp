@@ -1,5 +1,3 @@
-github.com/GeertJohan/go.leptonica v0.0.0-20141028105504-69e757e167e0 h1:rLEe4GKB0kAJHUvTAIPKvlLgUeA9xdDnBnJMZjgNiHw=
-github.com/GeertJohan/go.leptonica v0.0.0-20141028105504-69e757e167e0/go.mod h1:JB+XRlbjvPjZjE57J40BYJGOnjXqn/oKeF8Tn8+MASo=
 github.com/GeertJohan/go.tesseract v0.0.0-20160811093044-23c094222808 h1:cmAEggIY6Ksn3VGs1srZEIs3Sc7Xllmuwp9Vj6/ZCa8=
 github.com/GeertJohan/go.tesseract v0.0.0-20160811093044-23c094222808/go.mod h1:xTfRp0iiH6rHWCkTURliJ1ekpN3kNgIqvHcsNDLYskU=
 github.com/LdDl/go-darknet v1.3.7 h1:8i10fk8wwzGKxzyHddTZkMssYoTKbVF8yW6WZDAD6WI=
