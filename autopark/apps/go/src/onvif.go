@@ -33,14 +33,6 @@ var (
 	// 	Threshold:                .2,
 	// }
 
-	//ocr için test edilmeli
-	// n = darknet.YOLONetwork{
-	// 	GPUDeviceIndex:           0,
-	// 	NetworkConfigurationFile: "assets/work3/yolov4-tiny-custom.cfg",
-	// 	WeightsFile:              "assets/work3/yolov4-tiny-custom_10000.weights",
-	// 	Threshold:                .2,
-	// }
-
 	// plaka tanımada zirve bu
 	// n = darknet.YOLONetwork{
 	// 	GPUDeviceIndex:           0,
@@ -105,6 +97,7 @@ func startOvif() {
 
 		client = gosseract.NewClient()
 		client.SetWhitelist("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
+
 		break
 	}
 
@@ -134,12 +127,15 @@ func analyseImage(img image.YCbCr) {
 
 		detects = append(detects, d)
 		imgDarknet2 := img.SubImage(image.Rect(d.StartPoint.X, d.StartPoint.Y, d.EndPoint.X, d.EndPoint.Y))
+		// imgPol := polish.PolishImage(polish.ModelTypeDeep, imgDarknet2)
+
 		buf := new(bytes.Buffer)
 		jpeg.Encode(buf, imgDarknet2, nil)
 		send_s3 := buf.Bytes()
 		client.SetImageFromBytes(send_s3)
 		text, _ := client.Text()
 		log.Println("plaka", text)
+
 		// defer imgDarknet3.Close()
 
 		// t, err := tesseract.NewTess(filepath.Join("/opt/homebrew/Cellar/tesseract/5.2.0/share", "tessdata"), "eng")

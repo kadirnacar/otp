@@ -12,6 +12,13 @@ require (
 )
 
 require (
+	github.com/pkg/errors v0.9.1 // indirect
+	github.com/unixpickle/essentials v1.1.0 // indirect
+	github.com/unixpickle/model3d v0.2.1 // indirect
+	github.com/unixpickle/polish v0.1.1 // indirect
+)
+
+require (
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/otiai10/gosseract v2.2.1+incompatible

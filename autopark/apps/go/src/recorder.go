@@ -175,7 +175,7 @@ func startRecorder() {
 					// if (pck.Time - start2).Milliseconds() >= Config.Recording.AiDuration {
 					// start2 = pck.Time
 					if pic, err := FrameDecoderSingle.DecodeSingle(pck.Data); err == nil && pic != nil {
-						go analyseImage(pic.Image)
+						analyseImage(pic.Image)
 					}
 					// go analyseImage(snapUrl)
 				}
