@@ -81,6 +81,25 @@ export class CameraManagement {
               element.detects.EndPoint.X - element.detects.StartPoint.X,
               element.detects.EndPoint.Y - element.detects.StartPoint.Y
             );
+
+            // if (element.chars) {
+            //   for (let chIndex = 0; chIndex < element.chars.length; chIndex++) {
+            //     const char = element.chars[chIndex];
+            //     if (
+            //       char.detects &&
+            //       char.detects.ClassNames &&
+            //       char.detects.ClassNames.includes('1') &&
+            //       char.detects.Probabilities.find((c) => c > 90)
+            //     ) {
+            //       this.ctx.rect(
+            //         element.detects.StartPoint.X + char.detects.StartPoint.X,
+            //         element.detects.StartPoint.Y + char.detects.StartPoint.Y,
+            //         char.detects.EndPoint.X - char.detects.StartPoint.X,
+            //         char.detects.EndPoint.Y - char.detects.StartPoint.Y
+            //       );
+            //     }
+            //   }
+            // }
           }
 
           // this.ctx.rect(

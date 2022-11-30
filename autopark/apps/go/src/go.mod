@@ -14,6 +14,8 @@ require (
 require (
 	github.com/clbanning/mxj v1.8.4 // indirect
 	github.com/google/uuid v1.3.0 // indirect
+	github.com/otiai10/gosseract v2.2.1+incompatible
+	github.com/otiai10/gosseract/v2 v2.4.0 // indirect
 	github.com/pion/datachannel v1.5.2 // indirect
 	github.com/pion/dtls/v2 v2.1.5 // indirect
 	github.com/pion/ice/v2 v2.2.6 // indirect

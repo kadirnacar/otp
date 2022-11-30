@@ -1,68 +1,65 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"image"
+	"image/jpeg"
 	"log"
 	"strings"
 	"time"
 
 	"github.com/LdDl/go-darknet"
+	"github.com/otiai10/gosseract/v2"
 
 	goonvif "source.smiproject.co/forks/go-onvif"
 )
 
 var (
 
-	// //ocr
-	// nocr = darknet.YOLONetwork{
-	// 	GPUDeviceIndex:           0,
-	// 	NetworkConfigurationFile: "assets/work6/ocr-net.cfg",
-	// 	WeightsFile:              "assets/work6/ocr-net.weights",
-	// 	Threshold:                .50,
-	// }
-
 	// en iyi
-	// n = darknet.YOLONetwork{
-	// 	GPUDeviceIndex:           0,
-	// 	NetworkConfigurationFile: "assets/work3/yolov4.cfg",
-	// 	WeightsFile:              "assets/work3/yolov4.weights",
-	// 	Threshold:                .2,
-	// }
-
-	// iyi araba ve plaka
 	n = darknet.YOLONetwork{
 		GPUDeviceIndex:           0,
-		NetworkConfigurationFile: "assets/work1/obj.cfg",
-		WeightsFile:              "assets/work1/obj_60000.weights",
+		NetworkConfigurationFile: "assets/work1/yolov4.cfg",
+		WeightsFile:              "assets/work1/yolov4.weights",
 		Threshold:                .2,
 	}
 
-	// buluyo ama karışık biraz
+	// iyi araba ve plaka
 	// n = darknet.YOLONetwork{
 	// 	GPUDeviceIndex:           0,
-	// 	NetworkConfigurationFile: "assets/work5/lpr.cfg",
-	// 	WeightsFile:              "assets/work5/yolov4-tiny-custom_60000.weights",
-	// 	Threshold:                .50,
+	// 	NetworkConfigurationFile: "assets/work2/obj.cfg",
+	// 	WeightsFile:              "assets/work2/obj_60000.weights",
+	// 	Threshold:                .2,
 	// }
 
-	// harfli buluyor ama iyi değil
+	//ocr için test edilmeli
 	// n = darknet.YOLONetwork{
 	// 	GPUDeviceIndex:           0,
-	// 	NetworkConfigurationFile: "assets/work4/DarkPlate.cfg",
-	// 	WeightsFile:              "assets/work4/DarkPlate_best.weights",
-	// 	Threshold:                .50,
+	// 	NetworkConfigurationFile: "assets/work3/yolov4-tiny-custom.cfg",
+	// 	WeightsFile:              "assets/work3/yolov4-tiny-custom_10000.weights",
+	// 	Threshold:                .2,
+	// }
+
+	// plaka tanımada zirve bu
+	// n = darknet.YOLONetwork{
+	// 	GPUDeviceIndex:           0,
+	// 	NetworkConfigurationFile: "assets/work4/yolov4-tiny-obj.cfg",
+	// 	WeightsFile:              "assets/work4/tiny-car.weights",
+	// 	Threshold:                .2,
 	// }
 
 	// netw         *engine.YOLONetwork
 	rtspUrl      string
 	ovfDevice    goonvif.Device
 	profileToken string
+	client       *gosseract.Client
 )
 
 type DetextMsg struct {
 	Text    string             `json:"text"`
 	Detects *darknet.Detection `json:"detects"`
+	Image   []byte             `json:"image"`
 }
 
 func startOvif() {
@@ -105,6 +102,9 @@ func startOvif() {
 			time.Sleep(1 * time.Second)
 			continue
 		}
+
+		client = gosseract.NewClient()
+		client.SetWhitelist("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
 		break
 	}
 
@@ -133,10 +133,15 @@ func analyseImage(img image.YCbCr) {
 	for _, d := range dr.Detections {
 
 		detects = append(detects, d)
-		// imgDarknet2 := img.SubImage(image.Rect(d.StartPoint.X, d.StartPoint.Y, d.EndPoint.X, d.EndPoint.Y))
-		// buf := new(bytes.Buffer)
-		// jpeg.Encode(buf, imgDarknet2, nil)
-		// send_s3 := buf.Bytes()
+		imgDarknet2 := img.SubImage(image.Rect(d.StartPoint.X, d.StartPoint.Y, d.EndPoint.X, d.EndPoint.Y))
+		buf := new(bytes.Buffer)
+		jpeg.Encode(buf, imgDarknet2, nil)
+		send_s3 := buf.Bytes()
+		client.SetImageFromBytes(send_s3)
+		text, _ := client.Text()
+		log.Println("plaka", text)
+		// defer imgDarknet3.Close()
+
 		// t, err := tesseract.NewTess(filepath.Join("/opt/homebrew/Cellar/tesseract/5.2.0/share", "tessdata"), "eng")
 		// if err != nil {
 		// 	log.Fatalf("Error while initializing Tess: %s\n", err)
@@ -158,7 +163,7 @@ func analyseImage(img image.YCbCr) {
 
 		// t.SetImagePix(pix)
 
-		a := DetextMsg{Text: "", Detects: d}
+		a := DetextMsg{Text: text, Detects: d, Image: send_s3}
 		detectmsg = append(detectmsg, a)
 	}
 	data, err := json.Marshal(detectmsg)

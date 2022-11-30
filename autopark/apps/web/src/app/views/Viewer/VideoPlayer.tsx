@@ -131,7 +131,12 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
           if (dataJson.command == 'detect') {
             const boxes = JSON.parse(dataJson.data);
             if (this.cameraManagement) {
-              boxes?.forEach((x) => console.log({ class: x.detects.ClassNames[0], text: x.text }));
+              boxes?.forEach((x) => {
+                console.log(x);
+                if (this.img.current) {
+                  this.img.current.src = 'data:image/png;base64, ' + x.image;
+                }
+              });
               this.cameraManagement.setBoxes(boxes);
             }
           } else if (dataJson.command == 'image') {
