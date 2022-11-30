@@ -3,7 +3,7 @@ import * as tf from '@tensorflow/tfjs';
 import '@tensorflow/tfjs-backend-webgl';
 import yolo from 'tfjs-yolo';
 
-// tf.setBackend('webgl');
+tf.setBackend('webgl');
 class L2 {
   static className = 'L2';
 
@@ -13,6 +13,51 @@ class L2 {
 }
 tf.serialization.registerClass(L2 as any);
 
+class lambdaLayer extends tf.layers.Layer {
+  constructor(config) {
+    super(config);
+    if (config.name === undefined) {
+      config.name = (+new Date() * Math.random()).toString(36); //random name from timestamp in case name hasn't been set
+    }
+console.log(config);
+    this.name = config.name;
+    this.lambdaFunction = config.lambdaFunction;
+    this.lambdaOutputShape = config.lambdaOutputShape;
+    
+  }
+  lambdaFunction;
+  lambdaOutputShape;
+  static className = 'Lambda';
+
+  override call(input) {
+    return tf.tidy(() => {
+      let result: any = null;
+      eval(this.lambdaFunction);
+      return result;
+    });
+  }
+
+  override computeOutputShape(inputShape) {
+    if (this.lambdaOutputShape === undefined) {
+      //if no outputshape provided, try to set as inputshape
+      return inputShape[0];
+    } else {
+      return this.lambdaOutputShape;
+    }
+  }
+
+  override getConfig() {
+    const config = super.getConfig();
+    Object.assign(config, {
+      lambdaFunction: this.lambdaFunction,
+      lambdaOutputShape: this.lambdaOutputShape,
+    });
+    return config;
+  }
+
+ 
+}
+tf.serialization.registerClass(lambdaLayer);
 export class CameraManagement {
   constructor(canvas: HTMLCanvasElement, video: HTMLVideoElement, img: HTMLImageElement) {
     this.canvas = canvas;
@@ -27,13 +72,13 @@ export class CameraManagement {
   video: HTMLVideoElement;
   onVideoLoaded?: () => void;
   boxes: any[] = [];
-  // model?: tf.LayersModel;
-  yoloDetect?;
+  model?: tf.LayersModel;
+  // yoloDetect?;
 
   async init() {
     this.video.addEventListener('loadeddata', this.handleVideoLoadeddata.bind(this));
-    // this.model = await tf.loadLayersModel('/tfjs/model.json');
-    this.yoloDetect = await yolo.v3('/tfjs/model.json');
+    this.model = await tf.loadLayersModel('/tfjs/model.json');
+    // this.yoloDetect = await yolo.v3('/tfjs/model.json');
     // console.log(this.model);
   }
 
@@ -82,27 +127,27 @@ export class CameraManagement {
     let timeInSecond = timeStamp / 1000;
     if (timeInSecond - this.last2 >= this.speed2) {
       if (this.ctx && this.video) {
-        if (this.yoloDetect) {
-          // if (this.model) {
-          // const frame = tf.browser
-          //   .fromPixels(this.video)
-          //   // .resizeNearestNeighbor([608, 608])
-          //   // .toFloat()
-          //   .expandDims();
+        // if (this.yoloDetect) {
+        if (this.model) {
+          const frame = tf.browser
+            .fromPixels(this.video)
+            // .resizeNearestNeighbor([608, 608])
+            .toFloat()
+            .expandDims();
 
-          // // More pre-processing to be added here later
+          // More pre-processing to be added here later
 
-          // let predictions = await this.model.predict(frame);
+          let predictions = await this.model.predict(frame);
 
-          // // const resized = tf.image.resizeBilinear(frame, [608, 608]);
-          // // const expanded = tf.expandDims(resized, 0);
-          // // const prediction = this.model.predict(expanded);
+          // const resized = tf.image.resizeBilinear(frame, [608, 608]);
+          // const expanded = tf.expandDims(resized, 0);
+          // const prediction = this.model.predict(expanded);
 
-          // console.log(predictions);
+          console.log(predictions);
 
-          this.yoloDetect.predict(this.video, {}).then((boxes) => {
-            console.log(boxes);
-          });
+          // this.yoloDetect.predict(this.video, {}).then((boxes) => {
+          //   console.log(boxes);
+          // });
         }
 
         this.ctx.clearRect(0, 0, this.video.videoWidth, this.video.videoHeight);
