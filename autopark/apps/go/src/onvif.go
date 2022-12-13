@@ -22,7 +22,7 @@ var (
 		GPUDeviceIndex:           0,
 		NetworkConfigurationFile: "assets/work1/yolov4.cfg",
 		WeightsFile:              "assets/work1/yolov4.weights",
-		Threshold:                .2,
+		Threshold:                .5,
 	}
 
 	// iyi araba ve plaka
@@ -72,7 +72,7 @@ func startOvif() {
 		if err != nil {
 			log.Println("onvif profiles:", err)
 			time.Sleep(1 * time.Second)
-			continue
+			return
 		}
 
 		profileToken = profiles[0].Token

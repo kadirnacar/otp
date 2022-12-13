@@ -143,7 +143,7 @@ func loadConfig2(data string) {
 	}
 	tmp.Streams.Cl = make(map[string]viewer)
 	Config = &tmp
-
+	log.Println("onvif config:", Config.Recording.DeviceUrl)
 	go startOvif()
 
 }
