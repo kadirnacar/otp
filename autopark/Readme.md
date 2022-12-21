@@ -20,3 +20,7 @@ Use provided [Makefile](Makefile).
     ```
     Note: There is some struggle in Makefile for cuDNN, but I hope it works in Ubuntu atleast. Do not forget provide proper CUDA and cuDNN versions.
 
+* install darknet with nnpack for raspberry pi 3b+
+    ```shell
+    https://egemenertugrul.github.io/blog/Darknet-NNPACK-on-Raspberry-Pi/
+    ```
