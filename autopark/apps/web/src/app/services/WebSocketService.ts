@@ -7,7 +7,7 @@ export class WebSocketService extends EventEmitter {
     this.reference = '2B7E151628AED2A6ABF7158809CF4F3C';
     // this.socket = new WebSocket(`ws://${location.hostname}:${location.port}/ws`);
     if (environment.production == false) {
-      this.socket = new WebSocket(`ws://localhost:3333/ws?admin`);
+      this.socket = new WebSocket(`ws://${location.host}/ws?admin`);
     } else {
       this.socket = new WebSocket(`ws://${location.host}/ws?admin`);
     }
