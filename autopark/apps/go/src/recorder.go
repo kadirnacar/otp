@@ -12,6 +12,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/deepch/vdk/av"
+	"github.com/deepch/vdk/cgo/ffmpeg"
 	mp4 "github.com/deepch/vdk/format/mp4f"
 )
 
@@ -101,17 +103,17 @@ func startRecorder() {
 	file.Write(bufCodec)
 	file.Sync()
 
-	// var FrameDecoderSingle *ffmpeg.VideoDecoder
+	var FrameDecoderSingle *ffmpeg.VideoDecoder
 
-	// for _, element := range codecs {
-	// 	if element.Type().IsVideo() {
-	// 		FrameDecoderSingle, err = ffmpeg.NewVideoDecoder(element.(av.VideoCodecData))
-	// 		if err != nil {
-	// 			log.Fatalln("FrameDecoderSingle Error", err)
-	// 		}
-	// 	}
+	for _, element := range codecs {
+		if element.Type().IsVideo() {
+			FrameDecoderSingle, err = ffmpeg.NewVideoDecoder(element.(av.VideoCodecData))
+			if err != nil {
+				log.Fatalln("FrameDecoderSingle Error", err)
+			}
+		}
 
-	// }
+	}
 
 	snapUrl, _ := ovfDevice.GetSnapshot(profileToken)
 	snapUrl = strings.Replace(snapUrl, Config.Recording.DeviceUrl, Config.Recording.CameraUsername+":"+Config.Recording.CameraPassword+"@"+Config.Recording.DeviceUrl, -1)
@@ -172,9 +174,9 @@ func startRecorder() {
 				if pck.IsKeyFrame {
 					// if (pck.Time - start2).Milliseconds() >= Config.Recording.AiDuration {
 					// start2 = pck.Time
-					// if pic, err := FrameDecoderSingle.DecodeSingle(pck.Data); err == nil && pic != nil {
-					// 	analyseImage(pic.Image)
-					// }
+					if pic, err := FrameDecoderSingle.DecodeSingle(pck.Data); err == nil && pic != nil {
+						analyseImage(pic.Image)
+					}
 					// go analyseImage(snapUrl)
 				}
 

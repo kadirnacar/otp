@@ -6,7 +6,8 @@ import (
 	"image"
 	"image/jpeg"
 	"log"
-	"strings"
+	"net"
+	"net/url"
 	"time"
 
 	"github.com/LdDl/go-darknet"
@@ -83,11 +84,22 @@ func startOvif() {
 			time.Sleep(1 * time.Second)
 			continue
 		}
+		u, _ := url.Parse(uri.URI)
+		u2, _ := url.Parse(Config.Recording.CameraUrl)
 
-		rtspUrl = strings.Replace(uri.URI, Config.Recording.DeviceUrl, Config.Recording.CameraUsername+":"+Config.Recording.CameraPassword+"@"+Config.Recording.DeviceUrl, -1)
+		_, port, _ := net.SplitHostPort(u.Host)
+		host2, _, _ := net.SplitHostPort(u2.Host)
+
+		u.Host = host2 + ":" + port
+
+		u.User = url.UserPassword(Config.Recording.CameraUsername, Config.Recording.CameraPassword)
+
+		// rtspUrl = strings.Replace(uri.URI, Config.Recording.DeviceUrl, Config.Recording.CameraUsername+":"+Config.Recording.CameraPassword+"@"+Config.Recording.DeviceUrl, -1)
+		rtspUrl = u.String()
 		Config.Streams.URL = rtspUrl
 
 		log.Println("Onvif connected")
+		log.Println(uri.URI, u)
 
 		if err := n.Init(); err != nil {
 			log.Println("onvif darknet init:", err)
