@@ -146,20 +146,23 @@ func startStreamWebsocket() {
 			if !videoStart {
 				continue
 			}
-			ready, buf, err := muxerMSE.WritePacket(pck, false)
-			if err != nil {
-				log.Println(err.Error())
-				return
+			if pck.IsKeyFrame {
+				ready, buf, err := muxerMSE.WritePacket(pck, false)
+				if err != nil {
+					log.Println(err.Error())
+					return
+				}
+				if ready {
+					// err := conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
+					// if err != nil {
+					// 	log.Println(err.Error())
+					// 	return
+					// }
+					//err = websocket.Message.Send(ws, buf)
+					sendBuffer(buf)
+				}
 			}
-			if ready {
-				// err := conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
-				// if err != nil {
-				// 	log.Println(err.Error())
-				// 	return
-				// }
-				//err = websocket.Message.Send(ws, buf)
-				sendBuffer(buf)
-			}
+
 		}
 	}
 
