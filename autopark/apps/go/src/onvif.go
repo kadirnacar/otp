@@ -97,7 +97,7 @@ func startOvif() {
 		// rtspUrl = strings.Replace(uri.URI, Config.Recording.DeviceUrl, Config.Recording.CameraUsername+":"+Config.Recording.CameraPassword+"@"+Config.Recording.DeviceUrl, -1)
 		rtspUrl = u.String()
 		Config.Streams.URL = rtspUrl
-
+		//ffmpeg -i rtsp://USERNAME:PASSWORD@CAMERA_IP_ADDRESS:554 -vf fps=15 out%04d.png
 		log.Println("Onvif connected")
 		log.Println(uri.URI, u)
 
