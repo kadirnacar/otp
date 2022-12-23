@@ -15,7 +15,8 @@
         "tsConfig": "apps/server/tsconfig.app.json",
         "assets": ["apps/server/src/assets"],
         "webpackConfig": "apps/server/webpack.config.js",
-        "generatePackageJson": true
+        "generatePackageJson": true,
+        "deleteOutputPath": false
       },
       "configurations": {
         "production": {
