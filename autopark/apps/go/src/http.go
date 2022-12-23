@@ -159,7 +159,7 @@ func startStreamWebsocket() {
 					// 	return
 					// }
 					//err = websocket.Message.Send(ws, buf)
-					sendBuffer(buf)
+					go sendBuffer(buf)
 					log.Println("keyframe:", pck.Time)
 				}
 			}
