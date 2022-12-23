@@ -11,8 +11,6 @@ import (
 	"os"
 	"strings"
 	"time"
-
-	mp4 "github.com/deepch/vdk/format/mp4f"
 )
 
 var (
@@ -78,28 +76,28 @@ func startRecorder() {
 		AudioOnly = true
 	}
 
-	t := time.Now()
+	// t := time.Now()
 	os.MkdirAll(Config.Recording.SavePath, os.ModePerm)
 	pathCam := Config.Recording.SavePath + "/"
 	os.MkdirAll(pathCam, os.ModePerm)
 
-	var fullFileName = t.Format("02-01-2006-15-04-05-07") + ".mp4"
-	var file, err = os.Create(pathCam + "/" + fullFileName)
+	// var fullFileName = t.Format("02-01-2006-15-04-05-07") + ".mp4"
+	// var file, err = os.Create(pathCam + "/" + fullFileName)
 
-	if err != nil {
-		log.Println(err)
-	}
+	// if err != nil {
+	// 	log.Println(err)
+	// }
 
-	if err != nil {
-		log.Println("File not created")
-		return
-	}
-	muxerMp4 := mp4.NewMuxer(file)
-	muxerMp4.WriteHeader(codecs)
-	var _, bufCodec = muxerMp4.GetInit(codecs)
+	// if err != nil {
+	// 	log.Println("File not created")
+	// 	return
+	// }
+	// muxerMp4 := mp4.NewMuxer(file)
+	// muxerMp4.WriteHeader(codecs)
+	// var _, bufCodec = muxerMp4.GetInit(codecs)
 
-	file.Write(bufCodec)
-	file.Sync()
+	// file.Write(bufCodec)
+	// file.Sync()
 
 	// var FrameDecoderSingle *ffmpeg.VideoDecoder
 
@@ -118,39 +116,39 @@ func startRecorder() {
 
 	log.Println("snapUrl", snapUrl)
 
-	var files = make([]*os.File, len(Config.Recording.Paths))
+	// var files = make([]*os.File, len(Config.Recording.Paths))
 
-	for index, element := range Config.Recording.Paths {
-		os.MkdirAll(element, os.ModePerm)
-		pathCam := element + "/"
-		os.MkdirAll(pathCam, os.ModePerm)
+	// for index, element := range Config.Recording.Paths {
+	// 	os.MkdirAll(element, os.ModePerm)
+	// 	pathCam := element + "/"
+	// 	os.MkdirAll(pathCam, os.ModePerm)
 
-		fl, err := os.Create(pathCam + "/" + fullFileName)
-		if err != nil {
-			log.Println("File not created")
-			continue
-		} else {
-			fl.Write(bufCodec)
-			fl.Sync()
-			files[index] = fl
-		}
-	}
+	// 	fl, err := os.Create(pathCam + "/" + fullFileName)
+	// 	if err != nil {
+	// 		log.Println("File not created")
+	// 		continue
+	// 	} else {
+	// 		fl.Write(bufCodec)
+	// 		fl.Sync()
+	// 		files[index] = fl
+	// 	}
+	// }
 
 	go func() {
 		cid, ch := Config.clAd()
 		defer Config.clDe(cid)
 		defer Config.coDe()
-		defer muxerMp4.Finalize()
-		defer file.Sync()
-		defer file.Close()
+		// defer muxerMp4.Finalize()
+		// defer file.Sync()
+		// defer file.Close()
 
-		for _, fl := range files {
-			defer fl.Close()
-		}
+		// for _, fl := range files {
+		// 	defer fl.Close()
+		// }
 
 		var videoStart bool
 		noVideo := time.NewTimer(10 * time.Second)
-		var start time.Duration = 0
+		// var start time.Duration = 0
 
 		// var start2 time.Duration = 0
 		for {
@@ -176,63 +174,64 @@ func startRecorder() {
 					// 	analyseImage(pic.Image)
 					// }
 					// go analyseImage(snapUrl)
+					log.Println("keyframe:", pck.Time)
 				}
 
-				b, buf, err := muxerMp4.WritePacket(pck, false)
+				// b, buf, err := muxerMp4.WritePacket(pck, false)
 
-				if err == nil && b {
-					file.Write(buf)
-					for _, fl := range files {
-						fl.Write(buf)
-					}
+				// if err == nil && b {
+				// file.Write(buf)
+				// for _, fl := range files {
+				// 	fl.Write(buf)
+				// }
 
-					if pck.Time.Milliseconds() == 0 {
-						start = pck.Time
+				// if pck.Time.Milliseconds() == 0 {
+				// 	start = pck.Time
 
-					}
+				// }
 
-					if (pck.Time - start).Milliseconds() >= Config.Recording.SaveDuration {
+				// if (pck.Time - start).Milliseconds() >= Config.Recording.SaveDuration {
 
-						start = pck.Time
-						file.Sync()
-						file.Close()
+				// 	start = pck.Time
+				// 	file.Sync()
+				// 	file.Close()
 
-						for _, fl := range files {
-							fl.Sync()
-							fl.Close()
-						}
+				// 	for _, fl := range files {
+				// 		fl.Sync()
+				// 		fl.Close()
+				// 	}
 
-						t := time.Now()
-						fullFileName = t.Format("02-01-2006-15-04-05-07") + ".mp4"
-						file, err = os.Create(pathCam + "/" + fullFileName)
+				// 	t := time.Now()
+				// 	fullFileName = t.Format("02-01-2006-15-04-05-07") + ".mp4"
+				// 	file, err = os.Create(pathCam + "/" + fullFileName)
 
-						if err != nil {
-							log.Println("File not created")
-							return
-						}
+				// 	if err != nil {
+				// 		log.Println("File not created")
+				// 		return
+				// 	}
 
-						muxerMp4 = mp4.NewMuxer(file)
-						muxerMp4.WriteHeader(codecs)
-						_, bufCodec = muxerMp4.GetInit(codecs)
-						file.Write(bufCodec)
-						file.Sync()
+				// 	muxerMp4 = mp4.NewMuxer(file)
+				// 	muxerMp4.WriteHeader(codecs)
+				// 	_, bufCodec = muxerMp4.GetInit(codecs)
+				// 	file.Write(bufCodec)
+				// 	file.Sync()
 
-						for index, element := range Config.Recording.Paths {
-							pathCam := element + "/"
+				// 	for index, element := range Config.Recording.Paths {
+				// 		pathCam := element + "/"
 
-							fl, err := os.Create(pathCam + "/" + fullFileName)
-							if err != nil {
-								log.Println("File not created")
-								continue
-							} else {
-								fl.Write(bufCodec)
-								fl.Sync()
-								files[index] = fl
-							}
-						}
-					}
+				// 		fl, err := os.Create(pathCam + "/" + fullFileName)
+				// 		if err != nil {
+				// 			log.Println("File not created")
+				// 			continue
+				// 		} else {
+				// 			fl.Write(bufCodec)
+				// 			fl.Sync()
+				// 			files[index] = fl
+				// 		}
+				// 	}
+				// }
 
-				}
+				// }
 
 			}
 		}
