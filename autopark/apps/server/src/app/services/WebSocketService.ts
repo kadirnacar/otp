@@ -42,6 +42,7 @@ export default class WebSocketService {
             path: './records',
             paths: [],
             encrypted: false,
+            streamsource: '0',
           },
         };
         ws.on('ping', (data) => {
@@ -73,7 +74,6 @@ export default class WebSocketService {
 
               if (this.streamClient[id]) {
                 this.streamClient[id].clients.forEach((x) => {
-
                   if (this.clients[x] && this.clients[x].ws) {
                     this.clients[x].ws.send(data, { binary: true });
                   }

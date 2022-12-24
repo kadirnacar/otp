@@ -50,6 +50,7 @@ type Recording struct {
 	DeviceUrl      string   `json:"deviceurl"`
 	CameraUsername string   `json:"camusername"`
 	CameraPassword string   `json:"campassword"`
+	StreamSource   string   `json:"streamsource"`
 }
 
 // ServerST struct
@@ -142,6 +143,9 @@ func loadConfig2(data string) {
 		log.Fatalln(err)
 	}
 	tmp.Streams.Cl = make(map[string]viewer)
+	if tmp.Recording.StreamSource == "" {
+		tmp.Recording.StreamSource = "0"
+	}
 	Config = &tmp
 	go startOvif()
 

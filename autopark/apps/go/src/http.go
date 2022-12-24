@@ -166,7 +166,7 @@ func startStreamWebsocket() {
 				// }
 				// if ready {
 				if pic, err := FrameDecoderSingle.DecodeSingle(pck.Data); err == nil && pic != nil {
-					analyseImage(pic.Image)
+					go analyseImage(pic.Image)
 					buf := new(bytes.Buffer)
 
 					err2 := jpeg.Encode(buf, &pic.Image, nil)

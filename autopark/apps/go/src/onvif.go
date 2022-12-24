@@ -94,7 +94,7 @@ func startOvif() {
 
 		u.User = url.UserPassword(Config.Recording.CameraUsername, Config.Recording.CameraPassword)
 		values := u.Query()
-		values.Set("subtype", "1")
+		values.Set("subtype", Config.Recording.StreamSource)
 		u.RawQuery = values.Encode()
 		// rtspUrl = strings.Replace(uri.URI, Config.Recording.DeviceUrl, Config.Recording.CameraUsername+":"+Config.Recording.CameraPassword+"@"+Config.Recording.DeviceUrl, -1)
 		rtspUrl = u.String()

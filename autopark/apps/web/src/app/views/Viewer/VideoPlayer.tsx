@@ -21,6 +21,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
     this.video = React.createRef<HTMLVideoElement>();
     this.canvas = React.createRef<HTMLCanvasElement>();
     this.img = React.createRef<HTMLImageElement>();
+    this.imgVideo = React.createRef<HTMLImageElement>();
 
     this.state = {
       loaded: false,
@@ -36,6 +37,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
     selectedBoxIndex: -1,
   };
 
+  imgVideo: React.RefObject<HTMLImageElement>;
   img: React.RefObject<HTMLImageElement>;
   video: React.RefObject<HTMLVideoElement>;
   canvas: React.RefObject<HTMLCanvasElement>;
@@ -153,27 +155,32 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
 
       this.context.machine?.socketService?.addListener('stream', async (dataBlob: Blob) => {
         try {
-          const dataArray = await dataBlob.arrayBuffer();
-          // if (this.videoStarted) {
-          const data = new Uint8Array(dataArray);
-          if (data[0] == 9) {
-            const decoded_arr = data.slice(1);
-            let mimeCodec;
-            if (window.TextDecoder) {
-              mimeCodec = new TextDecoder('utf-8').decode(decoded_arr);
-            } else {
-              mimeCodec = this.Utf8ArrayToStr(decoded_arr);
-            }
-            if (this.mse) {
-              this.mseSourceBuffer = this.mse.addSourceBuffer(
-                'video/mp4; codecs="' + mimeCodec + '"'
-              );
-              this.mseSourceBuffer.mode = 'segments';
-              this.mseSourceBuffer.addEventListener('updateend', this.pushPacket);
-            }
-          } else {
-            this.readPacket(dataArray);
+          // const dataArray = await dataBlob.arrayBuffer();
+          if (this.img.current) {
+            var objectURL = URL.createObjectURL(dataBlob);
+            this.img.current.src = objectURL
           }
+          // if (this.videoStarted) {
+          // const data = new Uint8Array(dataArray);
+          // if (data[0] == 9) {
+          //   const decoded_arr = data.slice(1);
+          //   let mimeCodec;
+          //   if (window.TextDecoder) {
+          //     mimeCodec = new TextDecoder('utf-8').decode(decoded_arr);
+          //   } else {
+          //     mimeCodec = this.Utf8ArrayToStr(decoded_arr);
+          //   }
+          //   if (this.mse) {
+          //     this.mseSourceBuffer = this.mse.addSourceBuffer(
+          //       'video/mp4; codecs="' + mimeCodec + '"'
+          //     );
+          //     this.mseSourceBuffer.mode = 'segments';
+          //     this.mseSourceBuffer.addEventListener('updateend', this.pushPacket);
+          //   }
+          // } else {
+          //   console.log("read",dataArray)
+          //   this.readPacket(dataArray);
+          // }
           // } else {
           //   console.log('play');
           //   this.playMse();
@@ -262,6 +269,16 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
             console.log('pause');
           }}
         ></video>
+        <img
+          style={{
+            width: 'auto',
+            height: 'auto',
+            maxWidth: '100%',
+            maxHeight: '100%',
+            margin: 'auto',
+          }}
+          ref={this.imgVideo}
+        ></img>
         <img
           style={{
             width: 'auto',
