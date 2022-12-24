@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"image"
+	"image/draw"
 	"image/jpeg"
 	"log"
 	"net"
@@ -121,8 +122,8 @@ func startOvif() {
 }
 
 func analyseImage(img image.YCbCr) {
-
-	imgDarknet, err := darknet.Image2Float32(img.SubImage(img.Rect))
+	imgObject := img.SubImage(img.Rect)
+	imgDarknet, err := darknet.Image2Float32(imgObject)
 	if err != nil {
 		log.Println(err)
 		return
@@ -135,6 +136,20 @@ func analyseImage(img image.YCbCr) {
 		return
 	}
 
+	bounds := imgObject.Bounds()
+	gray := image.NewGray(image.Rect(0, 0, bounds.Dx(), bounds.Dy()))
+	draw.Draw(gray, bounds, imgObject, bounds.Min, draw.Src)
+	preImg, err := OtsuThreshold(gray, ThreshBinary)
+
+	if err == nil {
+		buf := new(bytes.Buffer)
+		jpeg.Encode(buf, preImg, nil)
+		send_s3 := buf.Bytes()
+		client.SetImageFromBytes(send_s3)
+		text, _ := client.Text()
+		log.Println("plaka", text)
+		sendMessage(WsMessage{Command: "plaka", Data: text})
+	}
 	var detectmsg []DetextMsg
 	var detects []*darknet.Detection
 	for _, d := range dr.Detections {

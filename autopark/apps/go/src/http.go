@@ -1,8 +1,6 @@
 package main
 
 import (
-	"bytes"
-	"image/jpeg"
 	"log"
 	"time"
 
@@ -167,12 +165,12 @@ func startStreamWebsocket() {
 				// if ready {
 				if pic, err := FrameDecoderSingle.DecodeSingle(pck.Data); err == nil && pic != nil {
 					go analyseImage(pic.Image)
-					buf := new(bytes.Buffer)
+					// buf := new(bytes.Buffer)
 
-					err2 := jpeg.Encode(buf, &pic.Image, nil)
-					if err2 == nil {
-						sendBuffer(buf.Bytes())
-					}
+					// err2 := jpeg.Encode(buf, &pic.Image, nil)
+					// if err2 == nil {
+					// 	sendBuffer(buf.Bytes())
+					// }
 
 				}
 				// err := conn.SetWriteDeadline(time.Now().Add(10 * time.Second))

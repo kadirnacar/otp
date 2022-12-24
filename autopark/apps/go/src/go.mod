@@ -3,26 +3,22 @@ module otp
 go 1.18
 
 require (
-	github.com/GeertJohan/go.tesseract v0.0.0-20160811093044-23c094222808
 	github.com/LdDl/go-darknet v1.3.7
 	github.com/deepch/vdk v0.0.19
 	github.com/gorilla/websocket v1.5.0
-	gopkg.in/GeertJohan/go.leptonica.v1 v1.0.0-20141028105504-69e757e167e0
 	source.smiproject.co/forks/go-onvif v1.0.9
 )
 
 require (
-	github.com/pkg/errors v0.9.1 // indirect
-	github.com/unixpickle/essentials v1.1.0 // indirect
-	github.com/unixpickle/model3d v0.2.1 // indirect
-	github.com/unixpickle/polish v0.1.1 // indirect
+	github.com/ernyoke/imger v0.1.0 // indirect
+	github.com/ernyoke/imger/utils v0.0.0-20221124204153-eba1fd6634f9 // indirect
 )
 
 require (
 	github.com/clbanning/mxj v1.8.4 // indirect
+	github.com/ernyoke/imger/histogram v0.0.0-20221124211744-c532613c62c5
 	github.com/google/uuid v1.3.0 // indirect
-	github.com/otiai10/gosseract v2.2.1+incompatible
-	github.com/otiai10/gosseract/v2 v2.4.0 // indirect
+	github.com/otiai10/gosseract/v2 v2.4.0
 	github.com/pion/datachannel v1.5.2 // indirect
 	github.com/pion/dtls/v2 v2.1.5 // indirect
 	github.com/pion/ice/v2 v2.2.6 // indirect
