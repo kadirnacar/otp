@@ -27,7 +27,6 @@ export default class WebSocketService {
         id = `admin-${uuidv4()}`;
       }
       await this.initClient(id, ws);
-
       if (!isNaN(idValue)) {
         const device = await this.getCamera(idValue);
         var json = {
@@ -73,9 +72,12 @@ export default class WebSocketService {
               }
 
               if (this.streamClient[id]) {
-                this.streamClient[id].clients.forEach((x) =>
-                  this.clients[x].ws.send(data, { binary: true })
-                );
+                this.streamClient[id].clients.forEach((x) => {
+
+                  if (this.clients[x] && this.clients[x].ws) {
+                    this.clients[x].ws.send(data, { binary: true });
+                  }
+                });
               }
 
               // if (admins.length > 0) {
@@ -90,7 +92,6 @@ export default class WebSocketService {
         ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
           try {
             const dataJson = JSON.parse(data.toString());
-
             if (dataJson.To != undefined) {
               if (dataJson.Command == 'rtsp') {
                 const streamClient = this.streamClient[dataJson.To.toString()];
@@ -138,7 +139,6 @@ export default class WebSocketService {
               this.streamClient[element].clients.splice(adminIndex, 1);
             }
             if (this.streamClient[element] && this.streamClient[element].clients.length == 0) {
-              console.log('close');
               this.clients[element].ws.close();
               delete this.clients[element];
             }

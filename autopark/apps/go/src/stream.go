@@ -50,6 +50,8 @@ func RTSPWorker(url string, OnDemand, DisableAudio, Debug bool) error {
 	}
 
 	defer RTSPClient.Close()
+	log.Println("RTSPClient codec : ", RTSPClient.CodecData)
+
 	if RTSPClient.CodecData != nil {
 		Config.coAd(RTSPClient.CodecData)
 	}

@@ -73,16 +73,19 @@ func startWs(addr string, camId string) {
 			errJson := json.Unmarshal([]byte(message), &tmp)
 			if errJson != nil {
 				log.Println("Ws Message Parse Error:", err)
-				continue
+				// continue
 			}
+			log.Println("websocket command", tmp.Command)
 
 			switch command := tmp.Command; command {
 			case "init":
 				if !isInit {
 					isInit = true
 					go loadConfig2(tmp.Data)
+					log.Println("websocket init command")
 				}
 			case "rtsp":
+				log.Println("websocket rtsp command")
 				go startStreamWebsocket()
 			case "close":
 				return
