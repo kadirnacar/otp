@@ -171,7 +171,7 @@ func startStreamWebsocket() {
 
 					err2 := jpeg.Encode(buf, &pic.Image, nil)
 					if err2 == nil {
-						go sendBuffer(buf.Bytes())
+						sendBuffer(buf.Bytes())
 					}
 
 				}
