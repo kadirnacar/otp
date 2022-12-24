@@ -117,6 +117,7 @@ func startOvif() {
 	}
 
 	go serveStreams()
+	go startStreamWebsocket()
 	// go startRecorder()
 
 }
