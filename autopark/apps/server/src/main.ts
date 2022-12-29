@@ -1,18 +1,16 @@
+import axios from 'axios';
 import * as bodyParser from 'body-parser';
 import express from 'express';
-import * as path from 'path';
-import * as WebSocket from 'ws';
-import 'reflect-metadata';
-import 'reflect-metadata';
 import * as http from 'http';
-import WebSocketService from './app/services/WebSocketService';
-import { DataRouter } from './app/routers/data';
-import { environment } from './environments/environment';
-import './app/services';
+import * as path from 'path';
+import 'reflect-metadata';
+import * as WebSocket from 'ws';
 import { CameraRouter } from './app/routers/camera';
-import Bree from 'bree';
-import axios from 'axios';
+import { DataRouter } from './app/routers/data';
+import './app/services';
 import { firebaseDb } from './app/services';
+import WebSocketService from './app/services/WebSocketService';
+import { environment } from './environments/environment';
 
 const app = express();
 const port = environment.port;
@@ -53,7 +51,7 @@ let ipRef;
 
 async function getIp() {
   const d = await axios.get('http://api.ipify.org/?format=json');
-  if (d && d.data && d.status == axios.HttpStatusCode.Ok) {
+  if (d && d.data && d.status == 200) {
     if (!fdb) {
       fdb = await firebaseDb.collection('macInfo').doc('ip');
     }
