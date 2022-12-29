@@ -26,7 +26,7 @@ AppDataSource.initialize()
     // here you can start to work with your database
     const cameras = await Models.Camera.find();
     cameras.forEach(async (camItem, index) => {
-      // await CameraService.connect(camItem);
+      await CameraService.connect(camItem);
     });
     console.log('start');
   })
@@ -40,7 +40,7 @@ initializeApp({
 
 export const firebaseDb = getFirestore();
 firebaseDb
-  .collection('cars')
+  .collection('macInfo')
   .get()
   .then((data) => {
     data.forEach((i) => console.log(i.id, i.data()));

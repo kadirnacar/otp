@@ -23,7 +23,6 @@ def on_message(ws, message):
             res = result[idx]
             
             for line in res:
-                print(line[1][0])
                 ws.send("deneme:"+line[1][0])
     
     
