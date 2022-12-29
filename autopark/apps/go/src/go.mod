@@ -10,13 +10,20 @@ require (
 )
 
 require (
-	github.com/ernyoke/imger v0.1.0 // indirect
-	github.com/ernyoke/imger/utils v0.0.0-20221124204153-eba1fd6634f9 // indirect
+	github.com/GeertJohan/go.leptonica v0.0.0-20141028105504-69e757e167e0 // indirect
+	github.com/GeertJohan/go.tesseract v0.0.0-20160811093044-23c094222808 // indirect
+	github.com/corona10/goimagehash v1.1.0 // indirect
+	github.com/deluan/lookup v0.0.7 // indirect
+	github.com/disintegration/imaging v1.6.2 // indirect
+	github.com/harrydb/go v0.0.0-20160105214235-0ff7a05d1aa4 // indirect
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
+	github.com/olegfedoseev/image-diff v0.0.0-20171116094004-897a4e73dfd6 // indirect
+	github.com/vitali-fedulov/images4 v1.1.3 // indirect
+	gopkg.in/GeertJohan/go.leptonica.v1 v1.0.0-20141028105504-69e757e167e0 // indirect
 )
 
 require (
 	github.com/clbanning/mxj v1.8.4 // indirect
-	github.com/ernyoke/imger/histogram v0.0.0-20221124211744-c532613c62c5
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/otiai10/gosseract/v2 v2.4.0
 	github.com/pion/datachannel v1.5.2 // indirect
@@ -37,7 +44,7 @@ require (
 	github.com/pion/udp v0.1.1 // indirect
 	github.com/pion/webrtc/v3 v3.1.42 // indirect
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d // indirect
-	golang.org/x/image v0.0.0-20211028202545-6944b10bf410 // indirect
-	golang.org/x/net v0.0.0-20220708220712-1185a9018129 // indirect
-	golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8 // indirect
+	golang.org/x/image v0.2.0 // indirect
+	golang.org/x/net v0.0.0-20220722155237-a158d28d115b // indirect
+	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
 )

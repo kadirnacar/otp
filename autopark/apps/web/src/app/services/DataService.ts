@@ -2,9 +2,7 @@ import { Result } from '../reducers/Result';
 import { ServiceBase } from './ServiceBase';
 
 export declare type FindConditions<T> = {
-  [P in keyof T]?: T[P] extends never
-    ? FindConditions<T[P]>
-    : FindConditions<T[P]>;
+  [P in keyof T]?: T[P] extends never ? FindConditions<T[P]> : FindConditions<T[P]>;
 };
 
 export interface ObjectLiteral {
@@ -116,10 +114,17 @@ export interface DataOptions<T> {
 }
 
 export class DataService extends ServiceBase {
-  public static async getItem<T>(
-    entity: string,
-    options?: DataOptions<T>
-  ): Promise<Result<T>> {
+  public static async getJsonData(): Promise<Result<any[]>> {
+    const result = await this.requestJson<any[]>(
+      {
+        url: `/a.json`,
+        method: 'GET',
+      },
+      true
+    );
+    return result;
+  }
+  public static async getItem<T>(entity: string, options?: DataOptions<T>): Promise<Result<T>> {
     const result = await this.requestJson<T>(
       {
         url: `/api/${entity}/item`,
@@ -146,10 +151,7 @@ export class DataService extends ServiceBase {
     return result;
   }
 
-  public static async getTree<T>(
-    entity: string,
-    options?: DataOptions<T>
-  ): Promise<Result<T>> {
+  public static async getTree<T>(entity: string, options?: DataOptions<T>): Promise<Result<T>> {
     const result = await this.requestJson<T>(
       {
         url: `/api/${entity}/tree/tree`,
@@ -228,10 +230,7 @@ export class DataService extends ServiceBase {
     );
     return result;
   }
-  public static async delete<T>(
-    entity: string,
-    id: string
-  ): Promise<Result<T>> {
+  public static async delete<T>(entity: string, id: string): Promise<Result<T>> {
     const result = await this.requestJson<T>(
       {
         url: `/api/${entity}/${id}`,

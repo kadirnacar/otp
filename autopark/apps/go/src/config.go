@@ -23,8 +23,9 @@ var empty interface{}
 
 // ConfigST struct
 type WsMessage struct {
-	Command string `json:"command"`
-	Data    string `json:"data"`
+	Command string    `json:"command"`
+	DataObj DetextMsg `json:"dataobj"`
+	Data    string    `json:"data"`
 	Buffer  *[]byte
 }
 
@@ -40,17 +41,16 @@ type ConfigST struct {
 }
 
 type Recording struct {
-	Duration       float32  `json:"duration"`
 	SavePath       string   `json:"path"`
 	Paths          []string `json:"paths"`
 	Encrypted      bool     `json:"encrypted"`
-	AiDuration     int64    `json:"aiduration"`
 	SaveDuration   int64    `json:"saveduration"`
 	CameraUrl      string   `json:"camurl"`
-	DeviceUrl      string   `json:"deviceurl"`
 	CameraUsername string   `json:"camusername"`
 	CameraPassword string   `json:"campassword"`
 	StreamSource   string   `json:"streamsource"`
+	SaveFile       bool     `json:"savefile"`
+	DetectSavePath string   `json:"detectsavepath"`
 }
 
 // ServerST struct

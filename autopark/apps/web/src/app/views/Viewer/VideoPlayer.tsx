@@ -158,7 +158,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
           // const dataArray = await dataBlob.arrayBuffer();
           if (this.img.current) {
             var objectURL = URL.createObjectURL(dataBlob);
-            this.img.current.src = objectURL
+            this.img.current.src = objectURL;
           }
           // if (this.videoStarted) {
           // const data = new Uint8Array(dataArray);
@@ -235,7 +235,8 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
             style={{
               position: 'absolute',
               background: '#cccccc70',
-              display: 'flex',
+              display: 'none',
+              // display: 'flex',
               top: 0,
               left: 0,
               bottom: 0,
@@ -275,7 +276,7 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
             height: 'auto',
             maxWidth: '100%',
             maxHeight: '100%',
-            margin: 'auto',
+            position: 'relative',
           }}
           ref={this.imgVideo}
         ></img>
@@ -287,6 +288,33 @@ export default class VideoPlayer extends Component<Props, State, typeof BAContex
             maxHeight: '100%',
             margin: 'auto',
             position: 'absolute',
+          }}
+          onClick={(ev) => {
+            if (this.img.current) {
+              var xPosition = 0;
+              var yPosition = 0;
+              var el: any = this.img.current;
+              while (el) {
+                if (el.tagName == 'BODY') {
+                  // deal with browser quirks with body/window/document and page scroll
+                  var xScrollPos = el.scrollLeft || document.documentElement.scrollLeft;
+                  var yScrollPos = el.scrollTop || document.documentElement.scrollTop;
+
+                  xPosition += el.offsetLeft - xScrollPos + el.clientLeft;
+                  yPosition += el.offsetTop - yScrollPos + el.clientTop;
+                } else {
+                  xPosition += el.offsetLeft - el.scrollLeft + el.clientLeft;
+                  yPosition += el.offsetTop - el.scrollTop + el.clientTop;
+                }
+
+                if (el && el.offsetParent) {
+                  el = el.offsetParent;
+                } else {
+                  el = undefined;
+                }
+              }
+              console.log(ev.clientX - xPosition, ev.clientY - yPosition, ev);
+            }
           }}
           ref={this.img}
         ></img>

@@ -34,15 +34,15 @@ export default class WebSocketService {
           streams: { disable_audio: true, on_demand: false },
           recording: {
             camurl: `http://${device.url}:${device.port}/onvif/device_service`,
-            deviceurl: `${device.url}:${device.port}`,
             campassword: device.password,
             camusername: device.username,
-            aiduration: 1000,
             saveduration: 60000,
             path: './records',
+            detectsavepath: './detects',
             paths: [],
             encrypted: false,
             streamsource: '0',
+            savefile: false,
           },
         };
         ws.on('ping', (data) => {
@@ -53,13 +53,22 @@ export default class WebSocketService {
           ws.pong();
         });
         ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
+          const dataString = data.toString();
           const admins = Object.keys(this.clients)
             .filter((x) => x.includes('admin'))
             .map((x) => this.clients[x]);
+          const ocr = Object.keys(this.clients)
+            .filter((x) => x.includes('ocr'))
+            .map((x) => this.clients[x]);
+
+          console.log("msg :",dataString);
+
           if (!isBinary) {
             try {
-              if (admins.length > 0) {
-                const dataJson = JSON.parse(data.toString());
+              const dataJson = JSON.parse(dataString);
+              if (dataJson.command == 'detect' && ocr.length > 0) {
+                ocr.forEach((x) => x.ws.send(dataString));
+              } else if (admins.length > 0) {
                 dataJson.From = id;
                 admins.forEach((x) => x.ws.send(JSON.stringify(dataJson)));
               }
@@ -91,7 +100,9 @@ export default class WebSocketService {
       } else if (id.includes('admin')) {
         ws.on('message', (data: WebSocket.RawData, isBinary: boolean) => {
           try {
-            const dataJson = JSON.parse(data.toString());
+            const dataString = data.toString();
+
+            const dataJson = JSON.parse(dataString);
             if (dataJson.To != undefined) {
               if (dataJson.Command == 'rtsp') {
                 const streamClient = this.streamClient[dataJson.To.toString()];
@@ -100,7 +111,7 @@ export default class WebSocketService {
                   const to = this.clients[dataJson.To.toString()];
 
                   if (to) {
-                    to.ws.send(data.toString());
+                    to.ws.send(dataString);
                     this.streamClient[dataJson.To.toString()] = { clients: [id], headers: [] };
                   }
                 } else if (!streamClient.clients.includes(id)) {
@@ -114,7 +125,7 @@ export default class WebSocketService {
                 const to = this.clients[dataJson.To.toString()];
 
                 if (to) {
-                  to.ws.send(data.toString());
+                  to.ws.send(dataString);
                 }
               }
             }

@@ -1,12 +1,11 @@
-package main
+package threshold
 
 import (
 	"errors"
 	"image"
 	"image/color"
-
-	"github.com/ernyoke/imger/histogram"
-	"github.com/ernyoke/imger/utils"
+	"otp/imger/histogram"
+	"otp/imger/utils"
 )
 
 // Method is an enum type for global threshold methods

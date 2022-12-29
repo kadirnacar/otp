@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bytes"
+	"image/jpeg"
 	"log"
 	"time"
 
+	"github.com/deepch/vdk/av"
 	"github.com/deepch/vdk/cgo/ffmpeg"
 	mp4 "github.com/deepch/vdk/format/mp4f"
 	webrtc "github.com/deepch/vdk/format/webrtcv3"
@@ -45,7 +48,7 @@ func startStreamWebRTC(data string) {
 	}
 	// defer muxerWebRTC.Close()
 	log.Println("answer", answer)
-	go sendMessage(WsMessage{Command: "answer", Data: answer})
+	sendMessage(WsMessage{Command: "answer", Data: answer})
 	if err != nil {
 		log.Println("Write", err)
 		return
@@ -95,7 +98,7 @@ func startStreamWebRTC(data string) {
 
 func startStreamWebsocket() {
 	if !Config.ext() {
-		log.Println("Stream Not Found")
+		log.Println("Stream Not Found22")
 		return
 	}
 
@@ -121,15 +124,18 @@ func startStreamWebsocket() {
 	var videoStart bool
 	noVideo := time.NewTimer(10 * time.Second)
 	pingTicker := time.NewTicker(500 * time.Millisecond)
-	var FrameDecoderSingle *ffmpeg.VideoDecoder
 
+	var FrameDecoderSingle *ffmpeg.VideoDecoder
 	for _, element := range codecs {
 		if element.Type().IsVideo() {
-			FrameDecoderSingle, _ = ffmpeg.NewVideoDecoder(element)
+			var err error
+			FrameDecoderSingle, err = ffmpeg.NewVideoDecoder(element.(av.VideoCodecData))
+			if err != nil {
+				log.Fatalln("FrameDecoderSingle Error", err)
+			}
 		}
 
 	}
-
 	defer pingTicker.Stop()
 	defer log.Println("client exit")
 	for {
@@ -147,7 +153,7 @@ func startStreamWebsocket() {
 
 			return
 		case <-noVideo.C:
-			return
+			continue
 		case pck := <-ch:
 			if pck.IsKeyFrame {
 				noVideo.Reset(10 * time.Second)
@@ -157,30 +163,14 @@ func startStreamWebsocket() {
 				continue
 			}
 			if pck.IsKeyFrame {
-				// ready, buf, err := muxerMSE.WritePacket(pck, false)
-				// if err != nil {
-				// 	log.Println(err.Error())
-				// 	return
-				// }
-				// if ready {
 				if pic, err := FrameDecoderSingle.DecodeSingle(pck.Data); err == nil && pic != nil {
-					go analyseImage(pic.Image)
-					// buf := new(bytes.Buffer)
-
-					// err2 := jpeg.Encode(buf, &pic.Image, nil)
-					// if err2 == nil {
-					// 	sendBuffer(buf.Bytes())
-					// }
+					buf := new(bytes.Buffer)
+					err2 := jpeg.Encode(buf, &pic.Image, &jpeg.Options{Quality: 100})
+					if err2 == nil {
+						sendBuffer(buf.Bytes())
+					}
 
 				}
-				// err := conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
-				// if err != nil {
-				// 	log.Println(err.Error())
-				// 	return
-				// }
-				//err = websocket.Message.Send(ws, buf)
-				log.Println("keyframe:", pck.Time)
-				// }
 			}
 
 		}

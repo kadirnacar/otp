@@ -1,5 +1,9 @@
-import { DataSource } from 'typeorm';
 import * as Models from '@autopark/models';
+import { DataSource } from 'typeorm';
+import { initializeApp, applicationDefault, cert } from 'firebase-admin/app';
+import { getFirestore, Timestamp, FieldValue } from 'firebase-admin/firestore';
+import serviceAccount from '../autopark-otp-df5e348f1884.json';
+import { CameraService } from './CameraService';
 
 export const AppDataSource = new DataSource({
   // type: 'sqlite',
@@ -18,9 +22,26 @@ export const AppDataSource = new DataSource({
 });
 
 AppDataSource.initialize()
-  .then(() => {
+  .then(async () => {
     // here you can start to work with your database
+    const cameras = await Models.Camera.find();
+    cameras.forEach(async (camItem, index) => {
+      // await CameraService.connect(camItem);
+    });
+    console.log('start');
   })
   .catch((error) => {
     console.log('err', error);
+  });
+
+initializeApp({
+  credential: cert(serviceAccount as any),
+});
+
+export const firebaseDb = getFirestore();
+firebaseDb
+  .collection('cars')
+  .get()
+  .then((data) => {
+    data.forEach((i) => console.log(i.id, i.data()));
   });

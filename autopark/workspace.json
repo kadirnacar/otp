@@ -4,6 +4,7 @@
     "models": "libs/models",
     "server": "apps/server",
     "web": "apps/web",
-    "go": "apps/go"
+    "go": "apps/go",
+    "ocr": "apps/ocr"
   }
 }

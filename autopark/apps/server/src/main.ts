@@ -1,5 +1,5 @@
 import * as bodyParser from 'body-parser';
-import * as express from 'express';
+import  express from 'express';
 import * as path from 'path';
 import * as WebSocket from 'ws';
 import 'reflect-metadata';

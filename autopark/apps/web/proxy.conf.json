@@ -6,5 +6,9 @@
   "/lang": {
     "target": "http://localhost:3333",
     "secure": false
+  },
+  "/a.json": {
+    "target": "http://localhost:3333",
+    "secure": false
   }
 }
