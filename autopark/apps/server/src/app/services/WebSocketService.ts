@@ -2,11 +2,13 @@ import * as WebSocket from 'ws';
 import { IncomingMessage } from 'http';
 import { Camera as CameraModel } from '@autopark/models';
 import { v4 as uuidv4, v6 as uuidv6 } from 'uuid';
+import axios from 'axios';
 export default class WebSocketService {
   constructor(wss: WebSocket.Server) {
     this.wss = wss;
     this.clients = {};
     this.streamClient = {};
+    this.analyseData = this.analyseData.bind(this);
 
     this.wss.on('connection', async (ws: WebSocket, request: IncomingMessage) => {
       const urlSplit = request.url?.split('?');
@@ -57,17 +59,12 @@ export default class WebSocketService {
           const admins = Object.keys(this.clients)
             .filter((x) => x.includes('admin'))
             .map((x) => this.clients[x]);
-          const ocr = Object.keys(this.clients)
-            .filter((x) => x.includes('ocr'))
-            .map((x) => this.clients[x]);
-
-          console.log("msg :",dataString);
 
           if (!isBinary) {
             try {
               const dataJson = JSON.parse(dataString);
-              if (dataJson.command == 'detect' && ocr.length > 0) {
-                ocr.forEach((x) => x.ws.send(dataString));
+              if (dataJson.command == 'detect') {
+                this.analyseData(dataJson);
               } else if (admins.length > 0) {
                 dataJson.From = id;
                 admins.forEach((x) => x.ws.send(JSON.stringify(dataJson)));
@@ -182,5 +179,15 @@ export default class WebSocketService {
 
   async initClient(id, ws: WebSocket) {
     this.clients[id] = { ws } as any;
+  }
+
+  async analyseData(dataJson: any) {
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/ocr', dataJson);
+      console.log('plate:', response.data);
+    } catch (err) {
+      console.log(err);
+    }
+    // ocr.forEach((x) => x.ws.send(dataString));
   }
 }
