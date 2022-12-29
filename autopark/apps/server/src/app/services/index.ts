@@ -2,7 +2,7 @@ import * as Models from '@autopark/models';
 import { DataSource } from 'typeorm';
 import { initializeApp, applicationDefault, cert } from 'firebase-admin/app';
 import { getFirestore, Timestamp, FieldValue } from 'firebase-admin/firestore';
-import serviceAccount from '../autopark-otp-df5e348f1884.json';
+import serviceAccount from '../gservice.json';
 import { CameraService } from './CameraService';
 
 export const AppDataSource = new DataSource({
