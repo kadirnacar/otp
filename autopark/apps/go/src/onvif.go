@@ -26,8 +26,8 @@ var (
 	// en iyi
 	n = darknet.YOLONetwork{
 		GPUDeviceIndex:           1,
-		NetworkConfigurationFile: "assets/work1/yolov4.cfg",
-		WeightsFile:              "assets/work1/yolov4.weights",
+		NetworkConfigurationFile: "../../../dist/assets/work1/yolov4.cfg",
+		WeightsFile:              "../../../dist/assets/work1/yolov4.weights",
 		Threshold:                .5,
 	}
 

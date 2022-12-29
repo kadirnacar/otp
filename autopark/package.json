@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nx run-many --target=serve --projects=server,web,go,ocr",
-    "server": "nx run-many --target=serve --projects=server,web,go",
+    "server": "nx run-many --target=serve --projects=server,web",
     "rweb": "nx run-many --target=serve --projects=web",
     "bweb": "nx run-many --target=build --projects=web",
     "build": "nx run-many --target=build --projects=server,web,go",

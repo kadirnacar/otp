@@ -186,7 +186,7 @@ export default class WebSocketService {
       const response = await axios.post('http://127.0.0.1:5000/ocr', dataJson);
       console.log('plate:', response.data);
     } catch (err) {
-      console.log(err);
+      console.error("palaka hata");
     }
     // ocr.forEach((x) => x.ws.send(dataString));
   }
