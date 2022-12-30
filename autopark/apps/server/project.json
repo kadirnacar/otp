@@ -15,7 +15,7 @@
         "tsConfig": "apps/server/tsconfig.app.json",
         "assets": [
           "apps/server/src/assets",
-          { "input": "apps/ocr/src", "output": "ocr" }
+          { "input": "apps/ocr/src", "output": "./ocr", "glob": "*" }
         ],
         "webpackConfig": "apps/server/webpack.config.js",
         "generatePackageJson": true,
