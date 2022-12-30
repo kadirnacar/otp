@@ -9,7 +9,6 @@ import (
 	"log"
 	"net"
 	"net/url"
-	"os"
 	"strconv"
 	"time"
 
@@ -259,8 +258,7 @@ func analyseImage2(img image.Image, fname string) {
 }
 
 func analyseImage(imgOrj image.YCbCr) {
-	img := imgOrj.SubImage(imgOrj.Rect)
-	imgDarknet, err := darknet.Image2Float32(img)
+	imgDarknet, err := darknet.Image2Float32(imgOrj.SubImage(imgOrj.Rect))
 	var detectmsg []DetextMsg
 
 	if err != nil {
@@ -283,16 +281,16 @@ func analyseImage(imgOrj image.YCbCr) {
 			continue
 		}
 
-		f, err := os.Create(GetFilenameDate())
-		if err != nil {
-			panic(err)
-		}
-		defer f.Close()
-		if err = jpeg.Encode(f, img, &jpeg.Options{Quality: 100}); err != nil {
-			log.Printf("failed to encode: %v", err)
-		}
+		// f, err := os.Create(GetFilenameDate())
+		// if err != nil {
+		// 	panic(err)
+		// }
+		// defer f.Close()
+		// if err = jpeg.Encode(f, img, &jpeg.Options{Quality: 100}); err != nil {
+		// 	log.Printf("failed to encode: %v", err)
+		// }
 
-		imgDarknet2, _ := cropImage(img, image.Rect(d.StartPoint.X, d.StartPoint.Y, d.EndPoint.X, d.EndPoint.Y))
+		imgDarknet2 := imgOrj.SubImage(image.Rect(d.StartPoint.X, d.StartPoint.Y, d.EndPoint.X, d.EndPoint.Y))
 		bufdd := new(bytes.Buffer)
 		jpeg.Encode(bufdd, imgDarknet2, &jpeg.Options{Quality: 100})
 		send_s3 := bufdd.Bytes()
@@ -322,9 +320,9 @@ func analyseImage(imgOrj image.YCbCr) {
 		// plates = append(plates, text)
 		// a := DetextMsg{Text: plates, Detects: d, Image: send_s3}
 		// detectmsg = append(detectmsg, a)
-		data, err := json.Marshal(a)
+		// data, err := json.Marshal(a)
 		if err == nil {
-			sendMessage(WsMessage{Command: "detect", Data: string(data)})
+			sendMessage(WsMessage{Command: "detect", DataObj: a})
 		}
 	}
 
