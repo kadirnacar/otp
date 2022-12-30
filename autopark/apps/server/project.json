@@ -13,7 +13,10 @@
         "outputPath": "dist",
         "main": "apps/server/src/main.ts",
         "tsConfig": "apps/server/tsconfig.app.json",
-        "assets": ["apps/server/src/assets"],
+        "assets": [
+          "apps/server/src/assets",
+          { "input": "apps/ocr/src", "output": "ocr" }
+        ],
         "webpackConfig": "apps/server/webpack.config.js",
         "generatePackageJson": true,
         "deleteOutputPath": false
