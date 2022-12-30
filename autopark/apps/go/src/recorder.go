@@ -179,7 +179,7 @@ func startRecorder() {
 
 				if pck.IsKeyFrame {
 					if pic, err := FrameDecoderSingle.DecodeSingle(pck.Data); err == nil && pic != nil {
-						go analyseImage(pic.Image)
+						analyseImage(pic.Image)
 					}
 				}
 
