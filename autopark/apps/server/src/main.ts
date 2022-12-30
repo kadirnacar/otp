@@ -97,7 +97,7 @@ server.listen(port, () => {
 });
 
 try {
-  const phpfile = path.resolve(__dirname, 'ocr');
+  const phpfile = path.resolve(__dirname, 'ocr', 'main.php');
 
   try {
     if (fs.existsSync(phpfile)) {
