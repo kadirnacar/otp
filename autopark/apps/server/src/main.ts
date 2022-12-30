@@ -97,10 +97,11 @@ server.listen(port, () => {
 });
 
 try {
-  const phpfile = path.resolve(__dirname, 'ocr', 'main.php');
+  const phpfile = path.resolve(__dirname, 'ocr', 'main.py');
 
   try {
     if (fs.existsSync(phpfile)) {
+      console.log(path.parse(phpfile).name)
       const procPhp = spawn('python', ['-m', 'flask', '--app', path.parse(phpfile).name, 'run'], {
         cwd: path.resolve(__dirname, 'ocr'),
       });
