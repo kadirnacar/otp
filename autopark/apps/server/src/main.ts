@@ -101,7 +101,7 @@ try {
 
   try {
     if (fs.existsSync(phpfile)) {
-      spawn('python', [phpfile], {
+      spawn('python', ['-m', 'flask', '--app', path.parse(phpfile).name, 'run'], {
         cwd: path.resolve(__dirname, ''),
       });
     }
