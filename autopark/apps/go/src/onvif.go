@@ -15,8 +15,6 @@ import (
 
 	"github.com/LdDl/go-darknet"
 
-	tesseract "github.com/GeertJohan/go.tesseract"
-
 	"github.com/deluan/lookup"
 	goonvif "source.smiproject.co/forks/go-onvif"
 )
@@ -51,7 +49,6 @@ var (
 	rtspUrl      string
 	ovfDevice    goonvif.Device
 	profileToken string
-	client       *tesseract.Tess
 	// client       *gosseract.Client
 )
 var Result []DetextMsg
@@ -77,17 +74,6 @@ func initYoloNetwork() error {
 		time.Sleep(1 * time.Second)
 		return err
 	}
-
-	// client, _ = tesseract.NewTess("../../../dist/assets/tessdata", "eng")
-	// // client.SetPageSegMode(tesseract.PSM_SINGLE_CHAR)
-	// client.SetVariable("tessedit_char_whitelist", " ABCDEFGHIJKLMNOPRSTUVYZ0123456789")
-	// log.Println("langs:", client.AvailableLanguages())
-	// ocr = lookup.NewOCR(0.1)
-	// ocr.LoadFont("../../../dist/assets/testdata/font_1")
-	// client = gosseract.NewClient()
-	// client.SetWhitelist(" ABCDEFGHIJKLMNOPRSTUVYZ0123456789")
-	// client.SetLanguage("eng")
-	// client.SetPageSegMode(gosseract.PSM_RAW_LINE)
 	return nil
 }
 
