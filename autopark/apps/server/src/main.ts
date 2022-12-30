@@ -101,8 +101,12 @@ try {
 
   try {
     if (fs.existsSync(phpfile)) {
-      spawn('python', ['-m', 'flask', '--app', path.parse(phpfile).name, 'run'], {
+      const procPhp = spawn('python', ['-m', 'flask', '--app', path.parse(phpfile).name, 'run'], {
         cwd: path.resolve(__dirname, 'ocr'),
+      });
+      procPhp.stderr.on('data', async (chunk) => {
+        const msg: string = chunk.toString('utf8');
+        console.log('std output:', msg);
       });
     }
   } catch (err) {
