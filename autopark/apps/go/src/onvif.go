@@ -24,8 +24,8 @@ var (
 	// en iyi
 	n = darknet.YOLONetwork{
 		GPUDeviceIndex:           1,
-		NetworkConfigurationFile: "../../../dist/assets/work1/yolov4.cfg",
-		WeightsFile:              "../../../dist/assets/work1/yolov4.weights",
+		NetworkConfigurationFile: "assets/work1/yolov4.cfg",
+		WeightsFile:              "assets/work1/yolov4.weights",
 		Threshold:                .5,
 	}
 
@@ -40,8 +40,8 @@ var (
 	// plaka tanımada zirve bu
 	// n = darknet.YOLONetwork{
 	// 	GPUDeviceIndex:           0,
-	// 	NetworkConfigurationFile: "../../../dist/assets/work4/yolov4-tiny-obj.cfg",
-	// 	WeightsFile:              "../../../dist/assets/work4/tiny-car.weights",
+	// 	NetworkConfigurationFile: "assets/work4/yolov4-tiny-obj.cfg",
+	// 	WeightsFile:              "assets/work4/tiny-car.weights",
 	// 	Threshold:                .5,
 	// }
 
