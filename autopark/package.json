@@ -5,12 +5,11 @@
   "license": "MIT",
   "scripts": {
     "start": "nx run-many --target=serve --projects=server,web,go,ocr",
-    "server": "nx run-many --target=serve --projects=server,web",
-    "rweb": "nx run-many --target=serve --projects=web",
-    "bweb": "nx run-many --target=build --projects=web",
+    "server": "nx run-many --target=build --projects=server",
+    "web": "nx run-many --target=build --projects=web",
+    "go": "nx run-many --target=build --projects=go",
+    "ocr": "nx run-many --target=build --projects=ocr",
     "build": "nx run-many --target=build --projects=server,web,go",
-    "build-go": "nx run-many --target=build --projects=go",
-    "test": "nx build server --with-deps --buildLibsFromSource",
     "prod": "nx run-many --target=build --projects=server,web,go --prod"
   },
   "private": true,
