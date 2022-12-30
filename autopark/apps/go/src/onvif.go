@@ -260,7 +260,7 @@ func analyseImage2(img image.Image, fname string) {
 func analyseImage(imgOrj image.YCbCr) {
 	imgDarknet, err := darknet.Image2Float32(imgOrj.SubImage(imgOrj.Rect))
 	var detectmsg []DetextMsg
-
+	log.Println("Analyse image")
 	if err != nil {
 		log.Println(err)
 		return
