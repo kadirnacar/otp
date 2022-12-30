@@ -11,6 +11,8 @@ import './app/services';
 import { firebaseDb } from './app/services';
 import WebSocketService from './app/services/WebSocketService';
 import { environment } from './environments/environment';
+import fs from 'fs';
+import { spawn } from 'child_process';
 
 const app = express();
 const port = environment.port;
@@ -50,33 +52,37 @@ let fdb;
 let ipRef;
 
 async function getIp() {
-  const d = await axios.get('http://api.ipify.org/?format=json');
-  if (d && d.data && d.status == 200) {
-    if (!fdb) {
-      fdb = await firebaseDb.collection('macInfo').doc('ip');
-    }
-    if (!ipRef) {
-      ipRef = await fdb.get();
-    }
-    const fdb3 = await firebaseDb.collection('macInfo').doc('ip');
+  try {
+    const d = await axios.get('http://api.ipify.org/?format=json');
+    if (d && d.data && d.status == 200) {
+      if (!fdb) {
+        fdb = await firebaseDb.collection('macInfo').doc('ip');
+      }
+      if (!ipRef) {
+        ipRef = await fdb.get();
+      }
+      const fdb3 = await firebaseDb.collection('macInfo').doc('ip');
 
-    if (ipRef.exists && ipRef.data().ip != d.data.ip) {
-      await fdb.set(
-        {
-          ip: d.data.ip,
-        },
-        { merge: true }
-      );
-      ipRef = await fdb.get();
-    } else if (!ipRef.exists) {
-      await fdb.set(
-        {
-          ip: d.data.ip,
-        },
-        { merge: true }
-      );
-      ipRef = await fdb.get();
+      if (ipRef.exists && ipRef.data().ip != d.data.ip) {
+        await fdb.set(
+          {
+            ip: d.data.ip,
+          },
+          { merge: true }
+        );
+        ipRef = await fdb.get();
+      } else if (!ipRef.exists) {
+        await fdb.set(
+          {
+            ip: d.data.ip,
+          },
+          { merge: true }
+        );
+        ipRef = await fdb.get();
+      }
     }
+  } catch (err) {
+    console.log('firebase err:', err);
   }
 }
 
@@ -89,3 +95,17 @@ setInterval(() => {
 server.listen(port, () => {
   console.log(`Server started on port ${port} :)`);
 });
+
+try {
+  const phpfile = path.resolve(__dirname, 'ocr');
+
+  try {
+    if (fs.existsSync(phpfile)) {
+      spawn('python', [phpfile], {
+        cwd: path.resolve(__dirname, ''),
+      });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+} catch {}

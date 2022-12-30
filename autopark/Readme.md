@@ -56,7 +56,9 @@ Use provided [Makefile](Makefile).
     ```shell
     #pip install numpy==1.23.5
     sudo apt install numpy==1.23.5 libopencv-dev python3-opencv 
-    pip install paddlepaddle -i https://mirror.baidu.com/pypi/simple
+    python3 -m pip download paddlepaddle==2.4.1 -f https://www.paddlepaddle.org.cn/whl/linux/mkl/noavx/stable.html --no-index --no-deps
+    #inen dosyanın adı
+    pip install /home/autopark/projects/paddlepaddle-2.3.2-cp38-cp38-linux_x86_64.whl
     #python -m pip install paddlepaddle -i https://mirror.baidu.com/pypi/simple
     #python -m pip install paddlepaddle==2.4.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
     pip install paddleocr
