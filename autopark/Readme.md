@@ -21,8 +21,9 @@ Use provided [Makefile](Makefile).
     sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ xenial main'
     sudo apt update
     sudo apt install cmake
+
     #ffmpeg
-    sudo apt install libleptonica-dev ffmpeg libavformat-dev libavresample-dev
+    sudo apt install libleptonica-dev ffmpeg libavformat-dev libavresample-dev libswscale-dev
 
     #nvm
     sudo apt install -y curl 
@@ -46,15 +47,16 @@ Use provided [Makefile](Makefile).
     echo 'eval "$(pyenv init -)"' >> ~/.bashrc 
     source ~/.bashrc 
     pyenv install -l
-    pyenv install mambaforge
-    pyenv global mambaforge
-    pyenv shell mambaforge
+    pyenv install mambaforge-4.10.3-10
+    pyenv global mambaforge-4.10.3-10
+    pyenv shell mambaforge-4.10.3-10
     source ~/.bashrc 
     ```
 * install paddleocr
     ```shell
     #pip install numpy==1.23.5
-    pip install paddlepaddle
+    sudo apt install numpy==1.23.5 libopencv-dev python3-opencv 
+    pip install paddlepaddle -i https://mirror.baidu.com/pypi/simple
     #python -m pip install paddlepaddle -i https://mirror.baidu.com/pypi/simple
     #python -m pip install paddlepaddle==2.4.1 -i https://pypi.tuna.tsinghua.edu.cn/simple
     pip install paddleocr
@@ -74,9 +76,24 @@ Use provided [Makefile](Makefile).
 	sudo cp include/darknet.h /usr/include/darknet.h
 	sudo ldconfig
     ```
+* PostgreSql
+    ```shell
+    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+    sudo apt-get update
+
+    sudo apt install -y postgresql postgresql-contrib
+    sudo service postgresql start
+    sudo -u postgres psql -c "ALTER USER postgres PASSWORD '123';"
+    sudo -u postgres createuser otp
+    sudo -u postgres createdb otp
+    sudo -u postgres psql -c "ALTER USER otp PASSWORD '123';"
+    sudo -u postgres psql -c "grant all privileges on database otp to otp;"
+    ```
 * project
     ```shell
     git clone https://github.com/kadirnacar/otp.git
+    pip install websocket rel
     ```
 * install darknet with nnpack for raspberry pi 3b+
     ```shell
