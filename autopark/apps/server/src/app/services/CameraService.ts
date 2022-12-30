@@ -5,7 +5,6 @@ import * as path from 'path';
 
 export class CameraService {
   public static async connect(cameraModel: CameraModel) {
-    return;
     const rtspReader = new RtspReader();
     rtspReader.startStream(cameraModel);
   }
