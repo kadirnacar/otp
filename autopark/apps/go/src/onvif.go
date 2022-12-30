@@ -121,8 +121,8 @@ func startOvif() {
 		// }
 		currentConfigIndex, _ := strconv.Atoi(Config.Recording.StreamSource)
 		config := configs[currentConfigIndex]
-		config.Resolution.Width = 1920
-		config.Resolution.Height = 1080
+		config.Resolution.Width = 1280
+		config.Resolution.Height = 720
 		config.Quality = 6
 		config.RateControl.FrameRateLimit = 25
 		config.RateControl.BitrateLimit = 4096
