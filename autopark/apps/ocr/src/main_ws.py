@@ -9,7 +9,7 @@ from paddleocr import PaddleOCR, draw_ocr
 import os
 import base64
 from threading import Thread
-print(cv2.__version__)
+
 def on_message(ws, message):
     def run(*args):
         jsonData = json.loads(message)
