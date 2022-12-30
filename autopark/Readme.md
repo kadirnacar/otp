@@ -4,24 +4,33 @@ You need to install fork of [darknet](https://github.com/AlexeyAB/darknet). Late
 
 Use provided [Makefile](Makefile).
 #85.100.222.39
-* For CPU-based instalattion:
-    ```shell
-    sudo apt install libleptonica-dev ffmpeg libavformat-dev libavresample-dev
-    ```
-* install linux
+
+* install linux ubuntu 18.04
     ```shell
     echo 'options rtl8192ce ips=0 fwlps=0' >> /etc/modprobe.d/rtl8192ce.conf
     sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+    sudo nano /etc/systemd/logind.conf
+    sudo touch /etc/cloud/cloud-init.disabled
     sudo apt update -y
-    sudo apt install -y make build-essential cmake
-    
+    sudo apt install -y make build-essential cmake wget curl git
+
+    #cmake
+    sudo apt purge --auto-remove cmake
+    wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /etc/apt/trusted.gpg.d/kitware.gpg >/dev/null    
+    sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+    sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ xenial main'
+    sudo apt update
+    sudo apt install cmake
+    #ffmpeg
+    sudo apt install libleptonica-dev ffmpeg libavformat-dev libavresample-dev
+
     #nvm
     sudo apt install -y curl 
     curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
     source ~/.bashrc 
     
     #go
-    curl https://go.dev/dl/go1.19.4.linux-amd64.tar.gz
+    wget https://go.dev/dl/go1.19.4.linux-amd64.tar.gz
     sudo rm -rf /usr/local/go 
     sudo tar -C /usr/local -xzf go1.19.4.linux-amd64.tar.gz
     echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc 
@@ -32,9 +41,9 @@ Use provided [Makefile](Makefile).
         libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
         libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
     curl https://pyenv.run | bash
-    echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc 
-    echo 'eval "$(pyenv init --path)"' >> ~/.bashrc 
-    echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc 
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.bashrc 
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.bashrc 
+    echo 'eval "$(pyenv init -)"' >> ~/.bashrc 
     source ~/.bashrc 
     pyenv install -l
     pyenv install mambaforge
@@ -55,6 +64,7 @@ Use provided [Makefile](Makefile).
     git clone https://github.com/AlexeyAB/darknet.git
     cd darknet
     git checkout 9d40b619756be9521bc2ccd81808f502daaa3e9a 
+    sudo nano CMakeLists.txt
     mkdir build_release
     cd build_release
     cmake ..
@@ -63,6 +73,10 @@ Use provided [Makefile](Makefile).
     sudo cp libdarknet.so /usr/lib/libdarknet.so
 	sudo cp include/darknet.h /usr/include/darknet.h
 	sudo ldconfig
+    ```
+* project
+    ```shell
+    git clone https://github.com/kadirnacar/otp.git
     ```
 * install darknet with nnpack for raspberry pi 3b+
     ```shell
