@@ -21,7 +21,7 @@ sudo apt update -y
 Ubuntu 18.04 debian testing repository
 
 ```bash
-echo “deb http://ftp.us.debian.org/debian testing main contrib non-free” >> /etc/apt/sources.list
+echo "deb http://ftp.us.debian.org/debian testing main contrib non-free" >> /etc/apt/sources.list
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9
 ```
@@ -29,13 +29,13 @@ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0E98404D386FA1D9
 Ubuntu 18.04 arm64
 
 ```bash
-echo “deb http://ports.ubuntu.com/ubuntu-ports bionic-proposed restricted main multiverse universe” >> /etc/apt/sources.list
+echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-proposed restricted main multiverse universe" >> /etc/apt/sources.list
 ```
 
 Ubuntu 18.04 86_64
 
 ```bash
-echo “deb http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs)-proposed restricted main multiverse universe” >> /etc/apt/sources.list
+echo "deb http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs)-proposed restricted main multiverse universe" >> /etc/apt/sources.list
 ```
 
 - ## Developer tools
@@ -153,7 +153,7 @@ source ~/.bashrc
 Preinstall
 
 ```bash
-sudo apt install libopencv-dev python3-opencv
+sudo apt install libopencv-dev python3-opencv libatlas-base-dev libopenblas-dev libblas-dev liblapack-dev patchelf gfortran
 ```
 
 Install Paddlepaddle for x86_64 add noavx pip repository cpu
@@ -181,12 +181,20 @@ pip install -U protobuf
 # download the wheel -->
 
 Install Paddlepaddle for arm64 (Raspberry Pi) noavx cpu
-
+version 2.3.1
 ```bash
 wget https://github.com/Qengineering/Paddle-Raspberry-Pi/raw/main/paddlepaddle-2.3.1-cp39-cp39-linux_aarch64.whl
 pip install paddlepaddle-2.3.1-cp39-cp39-linux_aarch64.whl
 ```
-
+version 2.0.0
+```bash
+wget https://github.com/Qengineering/Paddle-Raspberry-Pi/raw/main/paddlepaddle-2.0.0-cp37-cp37m-linux_aarch64.whl
+pip install paddlepaddle-2.0.0-cp37-cp37m-linux_aarch64.whl
+```
+Test paddle
+```bash
+python -c 'import paddle;paddle.utils.run_check()'
+```
 Install PaddleOcr
 
 ```bash
