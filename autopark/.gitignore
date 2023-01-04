@@ -8,6 +8,7 @@ records
 bin
 gservice.json
 __pycache__
+dist/dockerfiles
 # dependencies
 node_modules
 

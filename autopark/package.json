@@ -11,7 +11,7 @@
     "ocr": "nx run-many --target=build --projects=ocr",
     "build": "nx run-many --target=build --projects=server,web,go",
     "prod": "nx run-many --target=build --projects=server,web,go --prod",
-    "dock": "docker run -it --name autopark --entrypoint \"/bin/bash\" autopark"
+    "dock": "docker run -it --name autopark --entrypoint \"/bin/bash\" autopark:20-04"
   },
   "private": true,
   "pkg": {

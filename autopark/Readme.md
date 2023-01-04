@@ -5,7 +5,7 @@ You need to install fork of [darknet](https://github.com/AlexeyAB/darknet). Late
 Use provided [Makefile](Makefile).
 #85.100.222.39
 
-# 1. Linux Ubuntu 18.04
+# 1. Linux Ubuntu 20.04
 
 ```bash
 # bazı wifiler için güç modu kapatma
@@ -15,6 +15,7 @@ sudo nano /etc/systemd/logind.conf
 sudo touch /etc/cloud/cloud-init.disabled
 sudo apt update -y
 ```
+
 
 - ## Add Testing repository
 
@@ -129,7 +130,7 @@ echo 'export PATH=$PATH:/usr/local/go/bin' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## 7. Install pyenv and mambaforge
+## 7. Install pyenv and 3.10
 
 ```bash
 sudo apt-get update -y; sudo apt-get install -y make build-essential libssl-dev zlib1g-dev \
@@ -141,13 +142,40 @@ echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 source ~/.bashrc
 pyenv install -l
-pyenv install mambaforge-4.10.3-10
-pyenv global mambaforge-4.10.3-10
-pyenv shell mambaforge-4.10.3-10
+pyenv install 3.10
+pyenv global 3.10
+pyenv shell 3.10
 source ~/.bashrc
 
 ```
 
+- ## GCC for 20.04
+```bash
+sudo apt-get install gcc-8 g++-8
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 9
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 8
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-9 9
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 8
+sudo update-alternatives --config gcc
+sudo update-alternatives --config g++
+```
+
+- ## Build Paddle
+```bash
+pip install numpy==1.23.5 wheel protobuf
+# find `dirname $(dirname $(which python3))` -name "libpython3.so"
+# echo 'export PYTHON_LIBRARY=/"root/.pyenv/versions/3.9.16/lib"' >> ~/.bashrc
+# echo 'export PYTHON_INCLUDE_DIRS="/root/.pyenv/versions/3.9.16/inclue"' >> ~/.bashrc
+# echo 'export PATH="/root/.pyenv/versions/3.9.16/lib:$PATH"' >> ~/.bashrc
+git clone https://github.com/PaddlePaddle/Paddle.git
+cd Paddle
+git checkout tags/v2.4.1 -b 2.4
+mkdir build && cd build
+cmake .. -DPY_VERSION=3.10 -DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") -DPYTHON_LIBRARY=$(python -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") -DWITH_GPU=OFF -DWITH_ARM=ON -DWITH_AVX=OFF
+make -j$(nproc)
+cd python/dist
+pip install paddlepaddle-0.0.0-cp310-cp310-linux_aarch64.whl
+```
 ## 8. Install paddleocr
 
 Preinstall

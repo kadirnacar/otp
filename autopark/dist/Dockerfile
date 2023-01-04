@@ -25,16 +25,15 @@ RUN apt-get update -y; apt-get install -y libssl-dev zlib1g-dev \
  libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 RUN cd /root/tmp && wget -O pyenv.sh https://pyenv.run
 RUN /bin/bash -c 'source /root/tmp/pyenv.sh'
-RUN ls
-RUN ls
+SHELL ["/bin/bash", "-c"]
 RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> /root/.bashrc && \
 echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> /root/.bashrc && \
 echo 'eval "$(pyenv init -)"' >> /root/.bashrc 
 SHELL ["/bin/bash", "-c"]
+RUN /root/.pyenv/bin/pyenv install 3.10
+RUN /root/.pyenv/bin/pyenv global 3.10
 RUN apt install -y libopencv-dev python3-opencv python3-dev libatlas-base-dev libopenblas-dev libblas-dev liblapack-dev patchelf gfortran
 ADD detects /root/tmp
-# COPY ./requirements.txt .   
-# RUN pip install -r requirements.txt
-# ADD . .
 EXPOSE 3335:3333
 CMD ["/bin/bash"]
+
