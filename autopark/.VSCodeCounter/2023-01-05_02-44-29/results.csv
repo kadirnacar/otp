@@ -1,0 +1,213 @@
+"filename", "language", "JSON", "TypeScript", "JSON with Comments", "Properties", "SCSS", "XML", "CSS", "TypeScript React", "HTML", "JavaScript", "Markdown", "Shell Script", "Ignore", "Go", "Go Checksum File", "Python", "Makefile", "Go Module File", "comment", "blank", "total"
+"/Volumes/Veri/github/otp/autopark/.prettierignore", "Ignore", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1, 2, 5
+"/Volumes/Veri/github/otp/autopark/.prettierrc", "JSON", 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 12
+"/Volumes/Veri/github/otp/autopark/Readme.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 275, 0, 0, 0, 0, 0, 0, 0, 8, 59, 342
+"/Volumes/Veri/github/otp/autopark/apps/go/project.json", "JSON", 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 23
+"/Volumes/Veri/github/otp/autopark/apps/go/src/Makefile", "Makefile", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 0, 16, 15, 104
+"/Volumes/Veri/github/otp/autopark/apps/go/src/config.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 229, 0, 0, 0, 0, 19, 33, 281
+"/Volumes/Veri/github/otp/autopark/apps/go/src/go.mod", "Go Module File", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46, 0, 5, 51
+"/Volumes/Veri/github/otp/autopark/apps/go/src/go.sum", "Go Checksum File", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 219, 0, 0, 0, 0, 1, 220
+"/Volumes/Veri/github/otp/autopark/apps/go/src/http.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 155, 0, 0, 0, 0, 9, 25, 189
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/blend/blend.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 17, 5, 68
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/blur/blur.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 15, 9, 83
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/convolution/convolution.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 0, 0, 14, 4, 73
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/convolution/kernel.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 55, 0, 0, 0, 0, 8, 11, 74
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/edgedetection/canny.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 143, 0, 0, 0, 0, 10, 17, 170
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/edgedetection/laplacian.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 17, 8, 64
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/edgedetection/sobel.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 16, 10, 77
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/effects/effects.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 0, 0, 19, 15, 142
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/generate/generate.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 0, 0, 5, 7, 103
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/grayscale/grayscale.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 2, 4, 28
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/histogram/histogram.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 15, 12, 130
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/imgio/io.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 88, 0, 0, 0, 0, 12, 9, 109
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/padding/padding.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 201, 0, 0, 0, 0, 28, 23, 252
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/resize/filter.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 52, 0, 0, 0, 0, 13, 16, 81
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/resize/resize.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 273, 0, 0, 0, 0, 19, 28, 320
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/threshold/threshold.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 178, 0, 0, 0, 0, 39, 17, 234
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/transform/transform.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 12, 8, 79
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/utils/constants.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 4, 5, 14
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/utils/helpers.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 0, 0, 0, 0, 12, 12, 93
+"/Volumes/Veri/github/otp/autopark/apps/go/src/imger/utils/parallelhelpers.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 0, 3, 3, 45
+"/Volumes/Veri/github/otp/autopark/apps/go/src/main.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 4, 6, 33
+"/Volumes/Veri/github/otp/autopark/apps/go/src/onvif.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 186, 0, 0, 0, 0, 94, 50, 330
+"/Volumes/Veri/github/otp/autopark/apps/go/src/recorder.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 207, 0, 0, 0, 0, 0, 40, 247
+"/Volumes/Veri/github/otp/autopark/apps/go/src/stream.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75, 0, 0, 0, 0, 6, 9, 90
+"/Volumes/Veri/github/otp/autopark/apps/go/src/test.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 2, 7, 58
+"/Volumes/Veri/github/otp/autopark/apps/go/src/wsocket.go", "Go", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 116, 0, 0, 0, 0, 3, 15, 134
+"/Volumes/Veri/github/otp/autopark/apps/ocr/project.json", "JSON", 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 22
+"/Volumes/Veri/github/otp/autopark/apps/ocr/src/main.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 1, 5, 28
+"/Volumes/Veri/github/otp/autopark/apps/ocr/src/main_ws.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 0, 0, 13, 19, 73
+"/Volumes/Veri/github/otp/autopark/apps/ocr/src/test.py", "Python", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 2, 6
+"/Volumes/Veri/github/otp/autopark/apps/server/project.json", "JSON", 52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 53
+"/Volumes/Veri/github/otp/autopark/apps/server/src/app/routers/camera.ts", "TypeScript", 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 29
+"/Volumes/Veri/github/otp/autopark/apps/server/src/app/routers/data.ts", "TypeScript", 0, 69, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10, 80
+"/Volumes/Veri/github/otp/autopark/apps/server/src/app/services/CameraService.ts", "TypeScript", 0, 61, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 8, 89
+"/Volumes/Veri/github/otp/autopark/apps/server/src/app/services/WebSocketService.ts", "TypeScript", 0, 155, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 19, 194
+"/Volumes/Veri/github/otp/autopark/apps/server/src/app/services/index.ts", "TypeScript", 0, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 48
+"/Volumes/Veri/github/otp/autopark/apps/server/src/assets/work1/yolov4.cfg", "Properties", 0, 0, 0, 235, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 45, 285
+"/Volumes/Veri/github/otp/autopark/apps/server/src/assets/work2/obj.cfg", "Properties", 0, 0, 0, 149, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 29, 184
+"/Volumes/Veri/github/otp/autopark/apps/server/src/assets/work4/yolov4-tiny-obj.cfg", "Properties", 0, 0, 0, 235, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 44, 284
+"/Volumes/Veri/github/otp/autopark/apps/server/src/environments/environment.prod.ts", "TypeScript", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"/Volumes/Veri/github/otp/autopark/apps/server/src/environments/environment.ts", "TypeScript", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"/Volumes/Veri/github/otp/autopark/apps/server/src/main.ts", "TypeScript", 0, 86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 13, 117
+"/Volumes/Veri/github/otp/autopark/apps/server/tsconfig.app.json", "JSON", 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 12
+"/Volumes/Veri/github/otp/autopark/apps/server/tsconfig.json", "JSON with Comments", 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 13
+"/Volumes/Veri/github/otp/autopark/apps/server/webpack.config.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 46
+"/Volumes/Veri/github/otp/autopark/apps/web/project.json", "JSON", 66, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 67
+"/Volumes/Veri/github/otp/autopark/apps/web/proxy.conf.json", "JSON", 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/BreadCrumb/breadCrumb-jss.ts", "TypeScript", 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 36
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/BreadCrumb/index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 63
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Controls/NumberField.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 115, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 129
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Header/header-jss.ts", "TypeScript", 0, 512, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 517
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Header/index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 215, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 16, 236
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Loading/Loading.scss", "SCSS", 0, 0, 0, 0, 53, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 60
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Loading/index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 126, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 25, 154
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/PapperBlock/index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 106
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/PapperBlock/papperStyle-jss.ts", "TypeScript", 0, 117, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 120
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/SidebarBig/MainMenuBig.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 212, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 13, 226
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/SidebarBig/index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 57, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 63
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/SidebarBig/sidebarBig-jss.ts", "TypeScript", 0, 249, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 253
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Tables/Table.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 161, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 172
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Tables/tableParts/ActionCell.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 48
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Tables/tableParts/TableHeader.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 79, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 85
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Tables/tableParts/TableToolbar.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 121, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 8, 130
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/Tables/tableStyle-jss.ts", "TypeScript", 0, 193, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 3, 208
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/LayoutThumb.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 41
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/ThemeThumb.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 68
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 253, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 264
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/settings-jss.ts", "TypeScript", 0, 202, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 205
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/templatePreview/BigSidebarThumb.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 66
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/templatePreview/LeftSidebarThumb.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 48
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/templatePreview/MegaMenuThumb.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 51
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/templatePreview/TopNavigationThumb.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 50
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/templatePreview/thumbPreview-jss.ts", "TypeScript", 0, 188, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 191
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/components/TemplateSettings/themePalette.ts", "TypeScript", 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 147
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/container/App/AppContext.ts", "TypeScript", 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 6
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/container/App/Application.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 34
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/container/App/ThemeWrapper.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 16, 128
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/container/App/index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 9, 61
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/container/Templates/Dashboard.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 87, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 11, 101
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/container/Templates/Layouts/LeftSidebarBig.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 4, 107
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/container/Templates/appStyles-jss.ts", "TypeScript", 0, 208, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 212
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/reducers/Base/index.ts", "TypeScript", 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 40
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/reducers/Data/actions.ts", "TypeScript", 0, 129, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 133
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/reducers/Data/reducer.ts", "TypeScript", 0, 113, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 120
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/reducers/Data/state.ts", "TypeScript", 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 18, 108
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/reducers/Result.ts", "TypeScript", 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/reducers/Ui/actions.ts", "TypeScript", 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 13, 90
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/reducers/Ui/reducer.ts", "TypeScript", 0, 82, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 8, 93
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/reducers/Ui/state.ts", "TypeScript", 0, 54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 12, 67
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/services/CameraService.ts", "TypeScript", 0, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 38
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/services/DataService.ts", "TypeScript", 0, 184, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 53, 8, 245
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/services/MachineService.ts", "TypeScript", 0, 160, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 14, 177
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/services/ServiceBase.ts", "TypeScript", 0, 124, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 16, 160
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/services/WebSocketService.ts", "TypeScript", 0, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 49
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/store/StoreHelper.ts", "TypeScript", 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 15
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/store/configureStore.ts", "TypeScript", 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 34
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/store/index.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 23
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/store/localStorage.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 21
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/utils.ts", "TypeScript", 0, 28, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 9, 48
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/views/Cameras/Form.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 193
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/views/Cameras/index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 127
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/views/Home/index.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 119, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 134
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/views/Viewer/CameraManagement.ts", "TypeScript", 0, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 14, 119
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/views/Viewer/CameraView.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 119, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 16, 136
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/views/Viewer/VideoPlayer.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 266, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 27, 325
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/withRouter.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 26
+"/Volumes/Veri/github/otp/autopark/apps/web/src/app/withWidth.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 24
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/favicons/browserconfig.xml", "XML", 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/favicons/manifest.json", "JSON", 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_boy.svg", "XML", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 12
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_boy2.svg", "XML", 0, 0, 0, 0, 0, 379, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 381
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_boy3.svg", "XML", 0, 0, 0, 0, 0, 378, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 380
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_boy4.svg", "XML", 0, 0, 0, 0, 0, 381, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 383
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_boy5.svg", "XML", 0, 0, 0, 0, 0, 381, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 383
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_girl.svg", "XML", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 14
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_girl2.svg", "XML", 0, 0, 0, 0, 0, 385, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 387
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_girl3.svg", "XML", 0, 0, 0, 0, 0, 385, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 387
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_girl4.svg", "XML", 0, 0, 0, 0, 0, 387, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 389
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/avatars/pp_girl5.svg", "XML", 0, 0, 0, 0, 0, 388, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 390
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/decoration/hexaColored.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/decoration/hexaDecoration.svg", "XML", 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 11
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/decoration/hexaGrey.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/decoration/hexaMonochrome.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/decoration/hexaWhite.svg", "XML", 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/logo/firebase.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/logo/material-ui.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/logo/react.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/logo/redux-saga.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/logo/redux.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/logo/webpack.svg", "XML", 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/pp_boy.svg", "XML", 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 12
+"/Volumes/Veri/github/otp/autopark/apps/web/src/assets/images/pp_girl.svg", "XML", 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 14
+"/Volumes/Veri/github/otp/autopark/apps/web/src/environments/environment.prod.ts", "TypeScript", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"/Volumes/Veri/github/otp/autopark/apps/web/src/environments/environment.ts", "TypeScript", 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 8
+"/Volumes/Veri/github/otp/autopark/apps/web/src/index.html", "HTML", 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 22
+"/Volumes/Veri/github/otp/autopark/apps/web/src/main.tsx", "TypeScript React", 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 29
+"/Volumes/Veri/github/otp/autopark/apps/web/src/mocks/menu.ts", "TypeScript", 0, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 21
+"/Volumes/Veri/github/otp/autopark/apps/web/src/polyfills.ts", "TypeScript", 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 8
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles.css", "CSS", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 2
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/Form.scss", "SCSS", 0, 0, 0, 0, 32, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 34
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/Messages.scss", "SCSS", 0, 0, 0, 0, 97, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 105
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/Progress.scss", "SCSS", 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 18
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/Table.scss", "SCSS", 0, 0, 0, 0, 91, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 93
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/Typography.scss", "SCSS", 0, 0, 0, 0, 84, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 9, 99
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/image-lightbox/image-lightbox.css", "CSS", 0, 0, 0, 0, 0, 0, 314, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 345
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/invoice/style.css", "CSS", 0, 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 11, 60
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/react-big-calendar/react-big-calendar.css", "CSS", 0, 0, 0, 0, 0, 0, 661, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 665
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/react-draft-wysiwyg/react-draft-wysiwyg.css", "CSS", 0, 0, 0, 0, 0, 0, 804, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 12, 827
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/react-dropzone/react-dropzone.css", "CSS", 0, 0, 0, 0, 0, 0, 159, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 22, 181
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/react-input-range/react-input-range.css", "CSS", 0, 0, 0, 0, 0, 0, 80, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 13, 93
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/react-loading-bar/index.css", "CSS", 0, 0, 0, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 72
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/react-weather/GenericWeather.css", "CSS", 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 70
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/rechart/styles.css", "CSS", 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 16
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/select/select.css", "CSS", 0, 0, 0, 0, 0, 0, 413, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 1, 424
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/slick-carousel/fonts/slick.svg", "XML", 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 15
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/slick-carousel/slick-carousel.css", "CSS", 0, 0, 0, 0, 0, 0, 119, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 120
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/slick-carousel/slick-theme.css", "CSS", 0, 0, 0, 0, 0, 0, 184, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 30, 218
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/components/vendors/slick-carousel/slick.css", "CSS", 0, 0, 0, 0, 0, 0, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 15, 120
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/layout/_buttons.scss", "SCSS", 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 39
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/layout/_forms.scss", "SCSS", 0, 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 55
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/layout/_layout.scss", "SCSS", 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 24
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/layout/_lists.scss", "SCSS", 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 20
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/layout/_media.scss", "SCSS", 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 10
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/layout/_tables.scss", "SCSS", 0, 0, 0, 0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 33
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/layout/_typography.scss", "SCSS", 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 49
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/layout/_variables.scss", "SCSS", 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 9, 42
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/layout/base.scss", "SCSS", 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 2, 15
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/mixins.scss", "SCSS", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/mixins/bourbon.scss", "SCSS", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/mixins/neat.scss", "SCSS", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/mixins/pallete.scss", "SCSS", 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 8
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/theme/applicationTheme.ts", "TypeScript", 0, 511, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 2, 534
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/theme/palette/colorfull.ts", "TypeScript", 0, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 23
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/theme/palette/darkPalette.ts", "TypeScript", 0, 147, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 149
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/theme/palette/lightPalette.ts", "TypeScript", 0, 147, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 149
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/theme/palette/themePalette.ts", "TypeScript", 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 147
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/theme/palette/themePaletteMode.ts", "TypeScript", 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 12
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/variables.scss", "SCSS", 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/variables/bitters.scss", "SCSS", 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/variables/custom_pallete.scss", "SCSS", 0, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 31
+"/Volumes/Veri/github/otp/autopark/apps/web/src/styles/variables/neat.scss", "SCSS", 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2
+"/Volumes/Veri/github/otp/autopark/apps/web/tsconfig.app.json", "JSON", 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 14
+"/Volumes/Veri/github/otp/autopark/apps/web/tsconfig.json", "JSON with Comments", 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 23
+"/Volumes/Veri/github/otp/autopark/apps/web/webpack.config.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 44
+"/Volumes/Veri/github/otp/autopark/assets/AppIcons/Assets.xcassets/AppIcon.appiconset/Contents.json", "JSON", 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
+"/Volumes/Veri/github/otp/autopark/babel.config.json", "JSON with Comments", 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Volumes/Veri/github/otp/autopark/libs/models/README.md", "Markdown", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 6, 12
+"/Volumes/Veri/github/otp/autopark/libs/models/project.json", "JSON", 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 10
+"/Volumes/Veri/github/otp/autopark/libs/models/src/index.ts", "TypeScript", 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2
+"/Volumes/Veri/github/otp/autopark/libs/models/src/lib/Entities/Camera.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 26
+"/Volumes/Veri/github/otp/autopark/libs/models/src/lib/Entities/Car.ts", "TypeScript", 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 79
+"/Volumes/Veri/github/otp/autopark/libs/models/src/lib/Entities/User.ts", "TypeScript", 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 17
+"/Volumes/Veri/github/otp/autopark/libs/models/src/lib/models.ts", "TypeScript", 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4
+"/Volumes/Veri/github/otp/autopark/libs/models/tsconfig.json", "JSON with Comments", 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 17
+"/Volumes/Veri/github/otp/autopark/libs/models/tsconfig.lib.json", "JSON", 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 12
+"/Volumes/Veri/github/otp/autopark/nx.json", "JSON", 44, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 45
+"/Volumes/Veri/github/otp/autopark/package-lock.json", "JSON", 17879, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 17880
+"/Volumes/Veri/github/otp/autopark/package.json", "JSON", 110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 111
+"/Volumes/Veri/github/otp/autopark/pyenv.sh", "Shell Script", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 6, 2, 13
+"/Volumes/Veri/github/otp/autopark/tools/tsconfig.tools.json", "JSON", 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 13
+"/Volumes/Veri/github/otp/autopark/tsconfig.base.json", "JSON", 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 24
+"/Volumes/Veri/github/otp/autopark/workspace.json", "JSON", 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 11
+"Total", "-", 18347, 4702, 53, 619, 639, 3150, 3025, 3068, 20, 86, 281, 5, 2, 2776, 219, 67, 73, 46, 862, 1515, 39555
